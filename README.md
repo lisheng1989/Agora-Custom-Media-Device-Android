@@ -3,46 +3,46 @@
 
 *Read this in other languages: [English](README.en.md)*
 
-è¿™ä¸ªå¼€æºç¤ºä¾‹é¡¹ç›®æ¼”ç¤ºäº†å¦‚ä½•ä½¿ç”¨Agora SDKä¸­æä¾›çš„æ–°çš„MediaIOæ¥å£
+Õâ¸ö¿ªÔ´Ê¾ÀıÏîÄ¿ÑİÊ¾ÁËÈçºÎÊ¹ÓÃAgora SDKÖĞÌá¹©µÄĞÂµÄMediaIO½Ó¿Ú
 
-åœ¨è¿™ä¸ªç¤ºä¾‹é¡¹ç›®ä¸­ï¼Œä½¿ç”¨æ–°çš„MediaIOæ¥å£å®ç°äº†ä»¥ä¸‹åŠŸèƒ½ï¼š
+ÔÚÕâ¸öÊ¾ÀıÏîÄ¿ÖĞ£¬Ê¹ÓÃĞÂµÄMediaIO½Ó¿ÚÊµÏÖÁËÒÔÏÂ¹¦ÄÜ£º
 
-1ã€å®ç°å…±äº«æ‰‹æœºå±å¹•æˆ–è€…å…±äº«ç‰¹å®šViewåˆ°è¿œç«¯
+1¡¢ÊµÏÖ¹²ÏíÊÖ»úÆÁÄ»»òÕß¹²ÏíÌØ¶¨Viewµ½Ô¶¶Ë
 
-2ã€å®ç°æœ¬åœ°è§†é¢‘å’ŒCameraä½œä¸ºæ•°æ®æºï¼Œæœ¬åœ°æ’­æ”¾å¹¶èƒ½é€åˆ°è¿œç«¯æ˜¾ç¤ºï¼Œæ•°æ®æºå¯ä»¥åˆ‡æ¢ã€‚
+2¡¢ÊµÏÖ±¾µØÊÓÆµºÍCamera×÷ÎªÊı¾İÔ´£¬±¾µØ²¥·Å²¢ÄÜËÍµ½Ô¶¶ËÏÔÊ¾£¬Êı¾İÔ´¿ÉÒÔÇĞ»»¡£
 
-ä½ å¯ä»¥åœ¨è¿™é‡ŒæŸ¥çœ‹Agoraè§†é¢‘SDKçš„å…¥é—¨ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
+Äã¿ÉÒÔÔÚÕâÀï²é¿´AgoraÊÓÆµSDKµÄÈëÃÅÊ¾ÀıÏîÄ¿£º[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
 
-ä½ ä¹Ÿå¯ä»¥æŸ¥çœ‹ Android å¹³å°çš„ä½¿ç”¨æ—§æ¥å£å®ç°å±å¹•å…±äº«çš„ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
+ÄãÒ²¿ÉÒÔ²é¿´ Android Æ½Ì¨µÄÊ¹ÓÃ¾É½Ó¿ÚÊµÏÖÆÁÄ»¹²ÏíµÄÊ¾ÀıÏîÄ¿£º[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
 
-ä½ ä¹Ÿå¯ä»¥æŸ¥çœ‹ iOS å¹³å°çš„ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
+ÄãÒ²¿ÉÒÔ²é¿´ iOS Æ½Ì¨µÄÊ¾ÀıÏîÄ¿£º[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
 
-## è¿è¡Œç¤ºä¾‹ç¨‹åº
-é¦–å…ˆåœ¨ [Agora.io æ³¨å†Œ](https://dashboard.agora.io/cn/signup/) æ³¨å†Œè´¦å·ï¼Œå¹¶åˆ›å»ºè‡ªå·±çš„æµ‹è¯•é¡¹ç›®ï¼Œè·å–åˆ° AppIDã€‚å°† AppID å¡«å†™è¿› "app/src/main/res/values/strings.xml"
+## ÔËĞĞÊ¾Àı³ÌĞò
+Ê×ÏÈÔÚ [Agora.io ×¢²á](https://dashboard.agora.io/cn/signup/) ×¢²áÕËºÅ£¬²¢´´½¨×Ô¼ºµÄ²âÊÔÏîÄ¿£¬»ñÈ¡µ½ AppID¡£½« AppID ÌîĞ´½ø "app/src/main/res/values/strings.xml"
 
 ```
 <string name="agora_app_id"><#YOUR APP ID#></string>
 ```
 
-ç„¶ååœ¨ [Agora.io SDK](https://www.agora.io/cn/download/) ä¸‹è½½ **è§†é¢‘é€šè¯ + ç›´æ’­ SDK**ï¼Œè§£å‹åå°†å…¶ä¸­çš„ **libs** æ–‡ä»¶å¤¹ä¸‹çš„ ***.jar** å¤åˆ¶åˆ°æœ¬é¡¹ç›®çš„ **app/libs** ä¸‹ï¼Œå…¶ä¸­çš„ **libs** æ–‡ä»¶å¤¹ä¸‹çš„ **arm64-v8a**/**x86**/**armeabi-v7a** å¤åˆ¶åˆ°æœ¬é¡¹ç›®çš„ **app/src/main/jniLibs** ä¸‹ã€‚
+È»ºóÔÚ [Agora.io SDK](https://www.agora.io/cn/download/) ÏÂÔØ **ÊÓÆµÍ¨»° + Ö±²¥ SDK**£¬½âÑ¹ºó½«ÆäÖĞµÄ **libs** ÎÄ¼ş¼ĞÏÂµÄ ***.jar** ¸´ÖÆµ½±¾ÏîÄ¿µÄ **app/libs** ÏÂ£¬ÆäÖĞµÄ **libs** ÎÄ¼ş¼ĞÏÂµÄ **arm64-v8a**/**x86**/**armeabi-v7a** ¸´ÖÆµ½±¾ÏîÄ¿µÄ **app/src/main/jniLibs** ÏÂ¡£
 
-æœ€åç”¨ Android Studio æ‰“å¼€è¯¥é¡¹ç›®ï¼Œè¿ä¸Šè®¾å¤‡ï¼Œç¼–è¯‘å¹¶è¿è¡Œã€‚
+×îºóÓÃ Android Studio ´ò¿ª¸ÃÏîÄ¿£¬Á¬ÉÏÉè±¸£¬±àÒë²¢ÔËĞĞ¡£
 
-ä¹Ÿå¯ä»¥ä½¿ç”¨ `Gradle` ç›´æ¥ç¼–è¯‘è¿è¡Œã€‚
+Ò²¿ÉÒÔÊ¹ÓÃ `Gradle` Ö±½Ó±àÒëÔËĞĞ¡£
 
-## è¿è¡Œç¯å¢ƒ
+## ÔËĞĞ»·¾³
 - Android Studio 2.0 +
-- çœŸå® Android è®¾å¤‡ (Nexus 5X æˆ–è€…å…¶å®ƒè®¾å¤‡)
-- éƒ¨åˆ†æ¨¡æ‹Ÿå™¨ä¼šå­˜åœ¨åŠŸèƒ½ç¼ºå¤±æˆ–è€…æ€§èƒ½é—®é¢˜ï¼Œæ‰€ä»¥æ¨èä½¿ç”¨çœŸæœº
+- ÕæÊµ Android Éè±¸ (Nexus 5X »òÕßÆäËüÉè±¸)
+- ²¿·ÖÄ£ÄâÆ÷»á´æÔÚ¹¦ÄÜÈ±Ê§»òÕßĞÔÄÜÎÊÌâ£¬ËùÒÔÍÆ¼öÊ¹ÓÃÕæ»ú
 
-## è”ç³»æˆ‘ä»¬
+## ÁªÏµÎÒÃÇ
 
-- å®Œæ•´çš„ API æ–‡æ¡£è§ [æ–‡æ¡£ä¸­å¿ƒ](https://docs.agora.io/cn/)
-- å¦‚æœåœ¨é›†æˆä¸­é‡åˆ°é—®é¢˜, ä½ å¯ä»¥åˆ° [å¼€å‘è€…ç¤¾åŒº](https://dev.agora.io/cn/) æé—®
-- å¦‚æœæœ‰å”®å‰å’¨è¯¢é—®é¢˜, å¯ä»¥æ‹¨æ‰“ 400 632 6626ï¼Œæˆ–åŠ å…¥å®˜æ–¹Qç¾¤ 12742516 æé—®
-- å¦‚æœéœ€è¦å”®åæŠ€æœ¯æ”¯æŒ, ä½ å¯ä»¥åœ¨ [Agora Dashboard](https://dashboard.agora.io) æäº¤å·¥å•
-- å¦‚æœå‘ç°äº†ç¤ºä¾‹ä»£ç çš„ bug, æ¬¢è¿æäº¤ [issue](https://github.com/AgoraIO/Agora-Screen-Sharing-Android/issues)
+- ÍêÕûµÄ API ÎÄµµ¼û [ÎÄµµÖĞĞÄ](https://docs.agora.io/cn/)
+- Èç¹ûÔÚ¼¯³ÉÖĞÓöµ½ÎÊÌâ, Äã¿ÉÒÔµ½ [¿ª·¢ÕßÉçÇø](https://dev.agora.io/cn/) ÌáÎÊ
+- Èç¹ûÓĞÊÛÇ°×ÉÑ¯ÎÊÌâ, ¿ÉÒÔ²¦´ò 400 632 6626£¬»ò¼ÓÈë¹Ù·½QÈº 12742516 ÌáÎÊ
+- Èç¹ûĞèÒªÊÛºó¼¼ÊõÖ§³Ö, Äã¿ÉÒÔÔÚ [Agora Dashboard](https://dashboard.agora.io) Ìá½»¹¤µ¥
+- Èç¹û·¢ÏÖÁËÊ¾Àı´úÂëµÄ bug, »¶Ó­Ìá½» [issue](https://github.com/AgoraIO/Agora-Screen-Sharing-Android/issues)
 
-## ä»£ç è®¸å¯
+## ´úÂëĞí¿É
 
 The MIT License (MIT).
