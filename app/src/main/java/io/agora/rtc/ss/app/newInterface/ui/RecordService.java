@@ -2,30 +2,31 @@ package io.agora.rtc.ss.app.newInterface.ui;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.projection.MediaProjection;
 import android.os.Binder;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 
 import io.agora.rtc.Constants;
-import io.agora.rtc.IRtcEngineEventHandler;
-import io.agora.rtc.RtcEngine;
 import io.agora.rtc.gl.EglBase;
 import io.agora.rtc.mediaio.AgoraSurfaceView;
 import io.agora.rtc.mediaio.MediaIO;
-import io.agora.rtc.ss.app.R;
 import io.agora.rtc.ss.app.newInterface.source.AgoraTextureRecord;
 import io.agora.rtc.ss.app.newInterface.source.ViewSharingCapturer;
+import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
+import io.agora.rtc.ss.app.rtcEngine.WorkerThread;
 import io.agora.rtc.video.VideoCanvas;
 
 
 public class RecordService extends Service {
 
     private static final String TAG = RecordService.class.getSimpleName();
-    private RtcEngine mRtcEngine;
+    private WorkerThread workerThread;
     private EglBase.Context mSharedContext;
     private MediaProjection mediaProjection;
     private AgoraTextureRecord textureSource;
@@ -79,7 +80,9 @@ public class RecordService extends Service {
     }
 
     public void setRecordView(View view) {
+
         this.recordView = view;
+        Log.i("TJY","setRecordView:"+view);
     }
 
     public boolean startRecord() {
@@ -107,46 +110,8 @@ public class RecordService extends Service {
     }
 
     public void initRtcEngine() {
-        if (mRtcEngine == null) {
-            try {
-                Log.i(TAG, "create mRtcEngine");
-                mRtcEngine = RtcEngine.create(getApplicationContext(), getString(R.string.agora_app_id), new IRtcEngineEventHandler() {
-                    @Override
-                    public void onJoinChannelSuccess(String channel, int uid, int elapsed) {
-                        Log.i(LOG_TAG, "onJoinChannelSuccess" + channel + " " + elapsed);
-                    }
-
-                    @Override
-                    public void onLeaveChannel(RtcStats stats) {
-                        Log.i(LOG_TAG, "onLeaveChannel");
-                    }
-
-                    @Override
-                    public void onWarning(int warn) {
-                        Log.d(LOG_TAG, "onWarning " + warn);
-                    }
-
-                    @Override
-                    public void onError(int err) {
-                        Log.d(LOG_TAG, "onError " + err);
-                    }
-
-                    @Override
-                    public void onAudioRouteChanged(int routing) {
-                        Log.i(LOG_TAG, "onAudioRouteChanged " + routing);
-                    }
-
-                });
-            } catch (Exception e) {
-                Log.e(LOG_TAG, Log.getStackTraceString(e));
-
-                throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
-            }
-
-            mRtcEngine.setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING);
-            mRtcEngine.enableVideo();
-            mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_360P, true);
-            mRtcEngine.setClientRole(Constants.CLIENT_ROLE_BROADCASTER);
+        if (this.workerThread.getRtcEngine() != null) {
+            this.doConfigEngine(Constants.CLIENT_ROLE_BROADCASTER);
         }
     }
 
@@ -157,7 +122,7 @@ public class RecordService extends Service {
     public void initSurfaceTexture() {
         releasTextureSource();
         releaseRGBASource();
-        mRtcEngine.stopPreview();
+        this.workerThread.getRtcEngine().stopPreview();
         textureSource = new AgoraTextureRecord(this, this.width, this.height, this.dpi, this.mediaProjection);
         mSharedContext = textureSource.getEglContext();
 
@@ -168,17 +133,19 @@ public class RecordService extends Service {
         render.setBufferType(MediaIO.BufferType.TEXTURE);
         render.setPixelFormat(MediaIO.PixelFormat.TEXTURE_OES);
 
-        mRtcEngine.setLocalVideoRenderer(render);
+        this.workerThread.getRtcEngine().setLocalVideoRenderer(render);
         previewSurfaceView = render;
         listener.surfaceIsReady(previewSurfaceView);
-        mRtcEngine.setVideoSource(textureSource);
-        mRtcEngine.startPreview();
+        this.workerThread.getRtcEngine().setVideoSource(textureSource);
+        this.workerThread.getRtcEngine().startPreview();
     }
 
     public void initSurfaceRGBA() {
-        mRtcEngine.stopPreview();
+
+        this.workerThread.getRtcEngine().stopPreview();
         releasTextureSource();
         releaseRGBASource();
+        Log.i("TJY","initSurfaceRGBA");
         viewSource = new ViewSharingCapturer(this.recordView);
 
         AgoraSurfaceView render = new AgoraSurfaceView(this);
@@ -187,12 +154,13 @@ public class RecordService extends Service {
         render.init(null);
         render.setBufferType(MediaIO.BufferType.BYTE_BUFFER);
         render.setPixelFormat(MediaIO.PixelFormat.RGBA);
-        mRtcEngine.setLocalRenderMode(VideoCanvas.RENDER_MODE_FIT);
-        mRtcEngine.setLocalVideoRenderer(render);
+        this.workerThread.getRtcEngine().setLocalRenderMode(VideoCanvas.RENDER_MODE_FIT);
+        this.workerThread.getRtcEngine().setLocalVideoRenderer(render);
         previewSurfaceView = render;
         listener.surfaceIsReady(previewSurfaceView);
-        mRtcEngine.setVideoSource(viewSource);
-        mRtcEngine.startPreview();
+        this.workerThread.getRtcEngine().setVideoSource(viewSource);
+        this.workerThread.getRtcEngine().startPreview();
+        Log.i("TJY","initSurfaceRGBA over");
     }
 
     public void releasTextureSource() {
@@ -214,14 +182,19 @@ public class RecordService extends Service {
     }
 
     public void joinChannel() {
-        mRtcEngine.joinChannel(null, channelName, "", 0);
+        this.workerThread.joinChannel(channelName, 0);
     }
 
     public void leaveChannel() {
-        mRtcEngine.stopPreview();
-        mRtcEngine.leaveChannel();
+        this.workerThread.getRtcEngine().stopPreview();
+        this.workerThread.getRtcEngine().leaveChannel();
         //RtcEngine.destroy();
         //mRtcEngine = null;
+    }
+
+    public void setWorkerThread(WorkerThread workerThread) {
+        this.workerThread = workerThread;
+        Log.i("TJY","workthread:"+workerThread);
     }
 
     public class RecordBinder extends Binder {
@@ -237,6 +210,7 @@ public class RecordService extends Service {
 
     public void setEnableViewRecord(boolean enableViewRecord) {
         isEnableViewRecord = enableViewRecord;
+        Log.i("TJY","running:"+running +" isEnableViewRecord"+isEnableViewRecord);
         if (running) {
             if (isEnableViewRecord) {
                 initSurfaceRGBA();
@@ -244,6 +218,18 @@ public class RecordService extends Service {
                 initSurfaceTexture();
             }
         }
+
+    }
+
+    private void doConfigEngine(int cRole) {
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        int prefIndex = pref.getInt(ConstantApp.PrefManager.PREF_PROPERTY_PROFILE_IDX, ConstantApp.DEFAULT_PROFILE_IDX);
+        if (prefIndex > ConstantApp.VIDEO_PROFILES.length - 1) {
+            prefIndex = ConstantApp.DEFAULT_PROFILE_IDX;
+        }
+        int vProfile = Constants.VIDEO_PROFILE_360P;
+        this.workerThread.configEngine(cRole, vProfile,true);
 
     }
 }

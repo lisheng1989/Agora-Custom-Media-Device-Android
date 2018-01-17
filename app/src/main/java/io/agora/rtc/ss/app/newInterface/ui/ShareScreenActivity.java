@@ -1,7 +1,6 @@
 package io.agora.rtc.ss.app.newInterface.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -23,10 +22,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import io.agora.rtc.ss.app.BaseActivity;
 import io.agora.rtc.ss.app.R;
 
 
-public class ShareScreenActivity extends Activity implements SurfaceReadyListener {
+public class ShareScreenActivity extends BaseActivity implements SurfaceReadyListener {
     private static final int RECORD_REQUEST_CODE = 101;
     private static final int STORAGE_REQUEST_CODE = 102;
     private static final int AUDIO_REQUEST_CODE = 103;
@@ -40,12 +40,11 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
     private CheckBox enableViewBox;
     private ImageView recordView;
     private EditText channelName;
+    private String channelNameString;
     private CheckBox enableLocal;
     private Boolean isEnableLocal = false;
     private View localView;
     private int pictureCount = 0;
-    private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
-    private static final int PERMISSION_REQ_ID_CAMERA = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +53,11 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
         projectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
 
         setContentView(R.layout.activity_new_interface);
+
+    }
+
+    @Override
+    protected void initUIandEvent() {
         viewLayout = (LinearLayout) findViewById(R.id.view_record_layout);
         recordView = (ImageView) findViewById(R.id.recordView);
         startFullBtn = (Button) findViewById(R.id.start_full_record);
@@ -100,10 +104,11 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
+                Log.i("TJY","setOnCheckedChangeListener"+isChecked);
                 if (isChecked) {
-                    recordService.setEnableViewRecord(true);
                     viewLayout.setVisibility(View.VISIBLE);
                     recordService.setRecordView(recordView);
+                    recordService.setEnableViewRecord(true);
                 } else {
                     recordService.setEnableViewRecord(false);
                     viewLayout.setVisibility(View.GONE);
@@ -125,8 +130,19 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
 
         Intent intent = new Intent(this, RecordService.class);
         bindService(intent, connection, BIND_AUTO_CREATE);
-        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO) && checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA)) {
-        }
+    }
+
+
+    @Override
+    protected void deInitUIandEvent() {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        worker().leaveChannel(channelNameString);
+        worker().preview(false, null, 0);
     }
 
     @Override
@@ -138,9 +154,11 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECORD_REQUEST_CODE && resultCode == RESULT_OK) {
-            recordService.setChannelName(channelName.getText().toString());
+            channelNameString = channelName.getText().toString();
+            recordService.setChannelName(channelNameString);
             mediaProjection = projectionManager.getMediaProjection(resultCode, data);
             recordService.setMediaProject(mediaProjection);
+            recordService.setWorkerThread(worker());
             recordService.startRecord();
             startFullBtn.setText(R.string.stop_full_record);
         }
@@ -156,7 +174,6 @@ public class ShareScreenActivity extends Activity implements SurfaceReadyListene
             recordService = binder.getRecordService();
             recordService.setConfig(metrics.widthPixels, metrics.heightPixels, metrics.densityDpi);
             recordService.setSurfaceReadyListener(ShareScreenActivity.this);
-            //recordService.initRtcEngine();
             startFullBtn.setEnabled(true);
             startFullBtn.setText(recordService.isRunning() ? R.string.stop_full_record : R.string.start_full_record);
         }

@@ -1,5 +1,6 @@
 package io.agora.rtc.ss.app.fileSource.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Matrix;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
 
@@ -19,6 +21,7 @@ import io.agora.rtc.gl.EglBase;
 import io.agora.rtc.mediaio.AgoraTextureCamera;
 import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
+import io.agora.rtc.ss.app.BaseActivity;
 import io.agora.rtc.ss.app.R;
 import io.agora.rtc.ss.app.fileSource.source.AgoraLocalVideoSource;
 import io.agora.rtc.ss.app.fileSource.source.PrivateTextureHelper;
@@ -34,6 +37,7 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
     public final static String TAG = "keke:";
     private Map<Integer, Boolean> mUsers;
     private String mChannelName;
+    private String videoPath;
     private int mClientRole;
 
     private TextureView mLocalTextureView;
@@ -72,8 +76,15 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("TJY", "onPause");
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        Log.i("TJY", "onStop");
         worker().leaveChannel(mChannelName);
         worker().preview(false, null, 0);
     }
@@ -88,23 +99,10 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         Log.e(TAG, "initUIandEvent");
         event().addEventHandler(this);
         Intent i = getIntent();
+        mChannelName = i.getStringExtra(ConstantApp.ACTION_KEY_ROOM_NAME);
+        videoPath = i.getStringExtra(ConstantApp.ACTION_KEY_VIDEO_PATH);
         mClientRole = i.getIntExtra(ConstantApp.ACTION_KEY_CROLE, Constants.CLIENT_ROLE_BROADCASTER);
-        if (mClientRole == Constants.CLIENT_ROLE_BROADCASTER) {
-            Log.e(TAG, "broadcaster");
-//            mVideoSource = new AgoraTextureCamera(this,640, 480);
-//            FrameLayout container = (FrameLayout) findViewById(R.id.texture_view_container);
-//            if (container.getChildCount() >= 1) {
-//                return;
-//            }
-//            mLocalTextureView = new TextureView(this);
-//            container.addView(mLocalTextureView);
-//            mRender = new PrivateTextureHelper(this, mLocalTextureView);
-//            ((PrivateTextureHelper)mRender).init(((AgoraTextureCamera)mVideoSource).getEglContext());
-//            ((PrivateTextureHelper)mRender).setBufferType(TEXTURE);
-//            ((PrivateTextureHelper)mRender).setPixelFormat(TEXTURE_OES);
-//            worker().setVideoSource(mVideoSource);
-
-            mVideoSource = new AgoraLocalVideoSource(this,640, 480);
+            mVideoSource = new AgoraLocalVideoSource(this,640, 480,videoPath);
             FrameLayout container = (FrameLayout) findViewById(R.id.texture_view_container);
             if (container.getChildCount() >= 1) {
                 return;
@@ -119,12 +117,8 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
 
             worker().setLocalRender(mRender);
             worker().preview(true, null, 0);
-        } else {
-            //do it in onFirstRemoteVideoDecoded;
-            Log.e(TAG, "audience");
-        }
         doConfigEngine(mClientRole);
-        mChannelName = i.getStringExtra(ConstantApp.ACTION_KEY_ROOM_NAME);
+
         worker().joinChannel(mChannelName, 0);
     }
 
@@ -168,7 +162,7 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         }
         int vProfile = ConstantApp.VIDEO_PROFILES[prefIndex];
 
-        worker().configEngine(cRole, vProfile);
+        worker().configEngine(cRole, vProfile,false);
     }
 
     private void addNewUser(int uid, int width, int height) {
@@ -224,16 +218,18 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
             return;
         }
         mLocalTextureView = new TextureView(this);
-        container.addView(mLocalTextureView);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         EglBase.Context sharedContext;
         if (mLocalSourceFlag) {
             Log.e(TAG, "switch to camera source");
             mVideoSource = new AgoraTextureCamera(this,640, 480);
             sharedContext = ((AgoraTextureCamera)mVideoSource).getEglContext();
+            container.getLayoutParams().width = wm.getDefaultDisplay().getWidth()*2/5;
         } else {
             Log.e(TAG, "switch to local video source");
-            mVideoSource = new AgoraLocalVideoSource(this, 640, 480);
+            mVideoSource = new AgoraLocalVideoSource(this, 640, 480,videoPath);
             sharedContext = ((AgoraLocalVideoSource)mVideoSource).getEglContext();
+            container.getLayoutParams().width = wm.getDefaultDisplay().getWidth();
         }
         mRender = new PrivateTextureHelper(this, mLocalTextureView);
         ((PrivateTextureHelper)mRender).init(sharedContext);
@@ -243,5 +239,6 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         worker().setLocalRender(mRender);
         worker().preview(true, null, 0);
         mLocalSourceFlag = !mLocalSourceFlag;
+        container.addView(mLocalTextureView);
     }
 }

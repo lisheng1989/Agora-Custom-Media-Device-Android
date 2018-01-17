@@ -44,10 +44,6 @@ dependencies {
         exclude group: 'com.google.android', module: 'android'
     }
 
-    // check memory leak
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-
     androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
     compile files('libs/agora-rtc-sdk.jar')
 }

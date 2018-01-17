@@ -24,7 +24,9 @@ public class ViewSharingCapturer implements IVideoSource {
     private Runnable mFrameProducer = new Runnable() {
         @Override
         public void run() {
+            Log.i("TJY","mFrameProducer_1");
             if (mContentView != null) {
+                Log.i("TJY","mFrameProducer_2");
                 mContentView.setDrawingCacheEnabled(true);
                 mContentView.buildDrawingCache();
                 Bitmap bmp = mContentView.getDrawingCache();
@@ -42,9 +44,11 @@ public class ViewSharingCapturer implements IVideoSource {
                 mContentView.setDrawingCacheEnabled(false);
                 byteBufferTemp = null;
                 if (!mCapturerIsPaused) {
-
+                    Log.i("TJY","mFrameProducerHandler.postDelayed");
                     mFrameProducerHandler.postDelayed(mFrameProducer, mFrameProducerIntervalMillis);
                 }
+            }else{
+                mFrameProducerHandler.postDelayed(mFrameProducer, mFrameProducerIntervalMillis);
             }
 
         }
@@ -62,7 +66,7 @@ public class ViewSharingCapturer implements IVideoSource {
 
     public boolean onInitialize(IVideoFrameConsumer var1) {
         try {
-            Log.i(TAG, "onInitialize");
+            Log.i(TAG, "TJY onInitialize");
             this.mIVideoFrameConsumer = var1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,6 +76,7 @@ public class ViewSharingCapturer implements IVideoSource {
     }
 
     public boolean onStart() {
+        Log.i(TAG, "TJY onStart");
         try {
             mCapturerIsPaused = false;
             mFrameProducerHandler.postDelayed(mFrameProducer, mFrameProducerIntervalMillis);
@@ -83,13 +88,13 @@ public class ViewSharingCapturer implements IVideoSource {
     }
 
     public void onStop() {
-        Log.i(TAG, "onStop");
+        Log.i(TAG, "TJY onStop");
         mCapturerIsPaused = true;
         mFrameProducerHandler.removeCallbacks(mFrameProducer);
     }
 
     public void onDispose() {
-        Log.i(TAG, "onDispose");
+        Log.i(TAG, "TJY onDispose");
     }
 
     public int getBufferType() {

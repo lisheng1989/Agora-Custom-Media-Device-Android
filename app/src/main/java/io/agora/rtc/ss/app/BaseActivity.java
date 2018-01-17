@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.ui;
+package io.agora.rtc.ss.app;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -9,10 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.widget.Toast;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         final View layout = findViewById(Window.ID_ANDROID_CONTENT);
         ViewTreeObserver vto = layout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -55,14 +54,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (isFinishing()) {
                     return;
                 }
-
                 boolean checkPermissionResult = checkSelfPermissions();
 
                 if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.M)) {
@@ -73,9 +70,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private boolean checkSelfPermissions() {
-        return checkSelfPermission(Manifest.permission.RECORD_AUDIO, ConstantApp.PERMISSION_REQ_ID_RECORD_AUDIO) &&
-                checkSelfPermission(Manifest.permission.CAMERA, ConstantApp.PERMISSION_REQ_ID_CAMERA) &&
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, ConstantApp.PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE);
+
+        return checkPermission(Manifest.permission.RECORD_AUDIO, ConstantApp.PERMISSION_REQ_ID_RECORD_AUDIO) &&
+                checkPermission(Manifest.permission.CAMERA, ConstantApp.PERMISSION_REQ_ID_CAMERA) &&
+                checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, ConstantApp.PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE);
     }
 
     @Override
@@ -83,10 +81,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         deInitUIandEvent();
         super.onDestroy();
     }
-
-
-    public boolean checkSelfPermission(String permission, int requestCode) {
-        log.debug("checkSelfPermission " + permission + " " + requestCode);
+    public Boolean checkPermission(String permission, int requestCode){
+        Log.i("TJY","check " + permission + " " + requestCode);
         if (ContextCompat.checkSelfPermission(this,
                 permission)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -96,10 +92,31 @@ public abstract class BaseActivity extends AppCompatActivity {
                     requestCode);
             return false;
         }
-
+        ((AGApplication) getApplication()).initWorkerThread();
         if (Manifest.permission.CAMERA.equals(permission)) {
+
             ((AGApplication) getApplication()).initWorkerThread();
         }
+        return true;
+    }
+
+    public boolean checkSelfPermission(String permission, int requestCode) {
+
+        if (ContextCompat.checkSelfPermission(this,
+                permission)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{permission},
+                    requestCode);
+            return false;
+        }
+        Log.i("TJY","try to checkSelfPermission ："+permission);
+        if (Manifest.permission.CAMERA.equals(permission)) {
+            Log.i("TJY","init workThread");
+            ((AGApplication) getApplication()).initWorkerThread();
+        }
+        Log.i("TJY","check " + permission + " " + requestCode);
         return true;
     }
 
@@ -119,14 +136,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return ((AGApplication) getApplication()).getWorkerThread().eventHandler();
     }
 
-    public final void showLongToast(final String msg) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,

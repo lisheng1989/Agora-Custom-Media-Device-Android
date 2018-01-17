@@ -7,11 +7,10 @@
     <!-- For formal released project, please use Dynamic Key
         http://docs.agora.io/en/user_guide/Component_and_Others/Dynamic_Key_User_Guide.html -->
     <!-- Tutorial Step 1 -->
-    <string name="agora_app_id">d954a23118b94ecd9dcdb67b0718d077</string>
 
     <string name="label_hello_agora">Hello, welcome</string>
-    <string name="label_use_old_interface">Test old interface</string>
-    <string name="label_use_new_interface">Test new interface</string>
+    <string name="label_use_old_interface">Video source Demo</string>
+    <string name="label_use_new_interface">Share Screen Demo</string>
     <string name="label_start_sharing_your_screen">Start Sharing your screen</string>
     <string name="label_stop_sharing_your_screen">Stop Sharing your screen</string>
 

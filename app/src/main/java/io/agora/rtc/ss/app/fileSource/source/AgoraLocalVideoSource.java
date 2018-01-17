@@ -21,12 +21,13 @@ import static io.agora.rtc.mediaio.MediaIO.PixelFormat.TEXTURE_OES;
 
 public class AgoraLocalVideoSource extends TextureSource {
     private static final String TAG = "AgoraLocalVideoSource";
-
+    private String videoPath = null;
     private Context mContext;
     private VideoDecoder mVideoDecoder;
 
-    public AgoraLocalVideoSource(Context context, int width, int height) {
+    public AgoraLocalVideoSource(Context context, int width, int height,String videoPath) {
         super(null, width, height);
+        this.videoPath = videoPath;
         mContext = context;
         Log.i(TAG, "AgoraLocalVideoSource");
     }
@@ -53,7 +54,7 @@ public class AgoraLocalVideoSource extends TextureSource {
         Log.i(TAG, "onCapturerOpened");
         try {
             mVideoDecoder = new VideoDecoder();
-            mVideoDecoder.setDataSource("file:///sdcard/vid_bigbuckbunny.mp4");
+            mVideoDecoder.setDataSource("file://"+this.videoPath);
             mVideoDecoder.setVideoSurface(new Surface(getSurfaceTexture()));
         } catch (IOException ie) {
             ie.printStackTrace();
@@ -89,6 +90,7 @@ public class AgoraLocalVideoSource extends TextureSource {
     public class VideoDecoder {
 
         //MediaExtractor related
+        private boolean eos = false;
         private MediaExtractor mExtractor;
         private String mFilePath;
         private MediaFormat mMediaFormat;
@@ -164,6 +166,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 
         public void start() {
             Log.i(TAG, "mediaSource start");
+            eos = false;
             playVideo();
         }
 
@@ -175,10 +178,12 @@ public class AgoraLocalVideoSource extends TextureSource {
 
         public void stop() {
             Log.i(TAG, "stop()");
-            if (playBackThread != null && playBackThread.isAlive()) {
+            eos = true;
+            release();
+/*            if (playBackThread != null && playBackThread.isAlive()) {
                 playBackThread.interrupt();
                 while (playBackThread.isAlive()) Log.e(TAG, "stop, playThread still Alive");
-            }
+            }*/
         }
 
         public void release() {
@@ -186,6 +191,7 @@ public class AgoraLocalVideoSource extends TextureSource {
             if (playBackThread != null && playBackThread.isAlive()) {
                 playBackThread.interrupt();
                 while (playBackThread.isAlive()) Log.e(TAG, "release, playThread still Alive");
+                playBackThread = null;
             }
 
             if (mDecoder != null) {
@@ -206,6 +212,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 
         private class VideoDecodeThread implements Runnable {
             public void run() {
+                eos = false;
                 playVideo();
             }
         }
@@ -214,12 +221,12 @@ public class AgoraLocalVideoSource extends TextureSource {
             return playBackThread;
         }
 
+
         private void playVideo() {
 
             final int NO_BUFFER_INDEX = -1;
             final long TS_TOO_EARLY_WARN = 300;//if early than 300 ms, give a waring
             final long TS_TOO_LATE_DROP = 200;//if later than 200ms, drop this frame
-            boolean eos = false;
             boolean signaledEos = false;
             int outputBufferIndex = NO_BUFFER_INDEX;
             int inputBufferIndex = NO_BUFFER_INDEX;
@@ -292,9 +299,11 @@ public class AgoraLocalVideoSource extends TextureSource {
                     }
                 }
             } catch (InterruptedException ie) {
+                eos = true;
                 ie.printStackTrace();
                 Log.d(TAG, "interrupt exception");
             } catch (IllegalStateException ile) {
+                eos = true;
                 ile.printStackTrace();
                 Log.d(TAG, "not in Executing state");
             }

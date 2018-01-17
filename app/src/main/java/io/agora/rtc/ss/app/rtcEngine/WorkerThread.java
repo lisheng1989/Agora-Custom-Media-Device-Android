@@ -69,7 +69,7 @@ public class WorkerThread extends Thread {
                     break;
                 case ACTION_WORKER_CONFIG_ENGINE:
                     Object[] configData = (Object[]) msg.obj;
-                    mWorkerThread.configEngine((int) configData[0], (int) configData[1]);
+                    mWorkerThread.configEngine((int) configData[0], (int) configData[1],(boolean) configData[2]);
                     break;
                 case ACTION_WORKER_PREVIEW:
                     Object[] previewData = (Object[]) msg.obj;
@@ -162,7 +162,7 @@ public class WorkerThread extends Thread {
         }
 
         ensureRtcEngineReadyLock();
-        mRtcEngine.joinChannel(null, channel, "OpenLive", uid);
+        mRtcEngine.joinChannel(null, channel, "ss", uid);
 
         mEngineConfig.mChannel = channel;
 
@@ -199,12 +199,12 @@ public class WorkerThread extends Thread {
 
     private final MyEngineEventHandler mEngineEventHandler;
 
-    public final void configEngine(int cRole, int vProfile) {
+    public final void configEngine(int cRole, int vProfile,boolean isSwap) {
         if (Thread.currentThread() != this) {
             log.warn("configEngine() - worker thread asynchronously " + cRole + " " + vProfile);
             Message envelop = new Message();
             envelop.what = ACTION_WORKER_CONFIG_ENGINE;
-            envelop.obj = new Object[]{cRole, vProfile};
+            envelop.obj = new Object[]{cRole, vProfile,isSwap};
             mWorkerHandler.sendMessage(envelop);
             return;
         }
@@ -213,11 +213,10 @@ public class WorkerThread extends Thread {
         mEngineConfig.mClientRole = cRole;
         mEngineConfig.mVideoProfile = vProfile;
 
-//        mRtcEngine.setVideoProfile(mEngineConfig.mVideoProfile, true);
-        mRtcEngine.setVideoProfile(mEngineConfig.mVideoProfile, false);
+        mRtcEngine.setVideoProfile(mEngineConfig.mVideoProfile, isSwap);
 
         mRtcEngine.setClientRole(cRole);
-
+        Log.i("tjy","configEngine " + cRole + " " + mEngineConfig.mVideoProfile+"isSwap:"+isSwap);
         log.debug("configEngine " + cRole + " " + mEngineConfig.mVideoProfile);
     }
 
@@ -266,7 +265,7 @@ public class WorkerThread extends Thread {
             }
             try {
                 mRtcEngine = RtcEngine.create(mContext, appId, mEngineEventHandler.mRtcEventHandler);
-                mRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
+                //mRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
             } catch (Exception e) {
                 log.error(Log.getStackTraceString(e));
                 throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));

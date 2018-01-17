@@ -14,14 +14,6 @@
         android:layout_marginTop="50dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="Welcome to Open Live!"
-            android:textSize="20sp" />
-
         <EditText
             android:id="@+id/room_name"
             android:layout_width="match_parent"
@@ -30,7 +22,17 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:hint="Input name of the Live?"
+            android:hint="Input channel Name"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/video_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:text="/sdcard/test.avi"
+            android:hint="video source path"
             android:inputType="text" />
 
         <Button
@@ -41,6 +43,6 @@
             android:layout_marginTop="40dp"
             android:onClick="onClickJoin"
             android:enabled="false"
-            android:text="Join Room" />
+            android:text="Join Channel" />
     </LinearLayout>
 </RelativeLayout>
