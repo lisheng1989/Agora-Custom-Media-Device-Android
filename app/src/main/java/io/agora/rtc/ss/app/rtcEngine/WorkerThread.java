@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.model;
+package io.agora.rtc.ss.app.rtcEngine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,7 +19,6 @@ import io.agora.rtc.RtcEngine;
 import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
 import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.fileSource.common.Constant;
 import io.agora.rtc.video.VideoCanvas;
 
 public class WorkerThread extends Thread {

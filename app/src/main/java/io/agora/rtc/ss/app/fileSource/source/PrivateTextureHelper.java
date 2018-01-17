@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.ui;
+package io.agora.rtc.ss.app.fileSource.source;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;

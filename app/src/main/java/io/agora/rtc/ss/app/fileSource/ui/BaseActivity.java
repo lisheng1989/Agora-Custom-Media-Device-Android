@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.ui;
+package io.agora.rtc.ss.app.fileSource.ui;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -20,11 +20,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 import io.agora.rtc.RtcEngine;
-import io.agora.rtc.ss.app.fileSource.openlive.AGApplication;
-import io.agora.rtc.ss.app.fileSource.openlive.model.ConstantApp;
-import io.agora.rtc.ss.app.fileSource.openlive.model.EngineConfig;
-import io.agora.rtc.ss.app.fileSource.openlive.model.MyEngineEventHandler;
-import io.agora.rtc.ss.app.fileSource.openlive.model.WorkerThread;
+import io.agora.rtc.ss.app.rtcEngine.AGApplication;
+import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
+import io.agora.rtc.ss.app.rtcEngine.EngineConfig;
+import io.agora.rtc.ss.app.rtcEngine.MyEngineEventHandler;
+import io.agora.rtc.ss.app.rtcEngine.WorkerThread;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private final static Logger log = LoggerFactory.getLogger(BaseActivity.class);

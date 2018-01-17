@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.model;
+package io.agora.rtc.ss.app.rtcEngine;
 
 import io.agora.rtc.Constants;
 

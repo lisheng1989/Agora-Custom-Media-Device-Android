@@ -1,11 +1,9 @@
-package io.agora.rtc.ss.app.fileSource.openlive;
+package io.agora.rtc.ss.app.rtcEngine;
 
 import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-
-import io.agora.rtc.ss.app.fileSource.openlive.model.WorkerThread;
 
 public class AGApplication extends Application {
 

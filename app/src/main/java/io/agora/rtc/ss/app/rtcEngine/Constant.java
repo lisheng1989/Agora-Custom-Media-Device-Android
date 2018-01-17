@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.common;
+package io.agora.rtc.ss.app.rtcEngine;
 
 import io.agora.rtc.RtcEngine;
 

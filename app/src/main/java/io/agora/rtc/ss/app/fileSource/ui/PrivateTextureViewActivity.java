@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.ui;
+package io.agora.rtc.ss.app.fileSource.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,8 +20,10 @@ import io.agora.rtc.mediaio.AgoraTextureCamera;
 import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
 import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.fileSource.openlive.model.AGEventHandler;
-import io.agora.rtc.ss.app.fileSource.openlive.model.ConstantApp;
+import io.agora.rtc.ss.app.fileSource.source.AgoraLocalVideoSource;
+import io.agora.rtc.ss.app.fileSource.source.PrivateTextureHelper;
+import io.agora.rtc.ss.app.rtcEngine.AGEventHandler;
+import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
 
 import static io.agora.rtc.mediaio.MediaIO.BufferType.BYTE_ARRAY;
 import static io.agora.rtc.mediaio.MediaIO.BufferType.TEXTURE;

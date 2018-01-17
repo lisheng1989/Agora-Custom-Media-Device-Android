@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.newInterface;
+package io.agora.rtc.ss.app.newInterface.ui;
 
 import android.app.Service;
 import android.content.Intent;

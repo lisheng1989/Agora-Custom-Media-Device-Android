@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import io.agora.rtc.ss.app.fileSource.openlive.ui.MainActivity;
-import io.agora.rtc.ss.app.newInterface.NewInterfaceActivity;
+import io.agora.rtc.ss.app.fileSource.ui.MainActivity;
+import io.agora.rtc.ss.app.newInterface.ui.ShareScreenActivity;
 
 public class InitActivity extends Activity {
 
@@ -45,7 +45,7 @@ public class InitActivity extends Activity {
 
     public void onNewInterfaceClicked(View view){
         Intent intent1 = new Intent(InitActivity.this,
-                NewInterfaceActivity.class);
+                ShareScreenActivity.class);
         startActivity(intent1);
         //this.finish();
     }

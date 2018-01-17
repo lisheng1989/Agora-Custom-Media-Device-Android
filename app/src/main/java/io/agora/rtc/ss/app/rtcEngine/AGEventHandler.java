@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.model;
+package io.agora.rtc.ss.app.rtcEngine;
 
 public interface AGEventHandler {
     void onFirstRemoteVideoDecoded(int uid, int width, int height, int elapsed);

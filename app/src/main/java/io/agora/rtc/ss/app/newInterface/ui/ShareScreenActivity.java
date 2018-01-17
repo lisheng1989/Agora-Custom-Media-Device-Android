@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.newInterface;
+package io.agora.rtc.ss.app.newInterface.ui;
 
 import android.Manifest;
 import android.app.Activity;
@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import io.agora.rtc.ss.app.R;
 
 
-public class NewInterfaceActivity extends Activity implements SurfaceReadyListener {
+public class ShareScreenActivity extends Activity implements SurfaceReadyListener {
     private static final int RECORD_REQUEST_CODE = 101;
     private static final int STORAGE_REQUEST_CODE = 102;
     private static final int AUDIO_REQUEST_CODE = 103;
@@ -111,13 +111,13 @@ public class NewInterfaceActivity extends Activity implements SurfaceReadyListen
             }
         });
 
-        if (ContextCompat.checkSelfPermission(NewInterfaceActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(ShareScreenActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
         }
 
-        if (ContextCompat.checkSelfPermission(NewInterfaceActivity.this, Manifest.permission.RECORD_AUDIO)
+        if (ContextCompat.checkSelfPermission(ShareScreenActivity.this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO}, AUDIO_REQUEST_CODE);
@@ -155,7 +155,7 @@ public class NewInterfaceActivity extends Activity implements SurfaceReadyListen
             RecordService.RecordBinder binder = (RecordService.RecordBinder) service;
             recordService = binder.getRecordService();
             recordService.setConfig(metrics.widthPixels, metrics.heightPixels, metrics.densityDpi);
-            recordService.setSurfaceReadyListener(NewInterfaceActivity.this);
+            recordService.setSurfaceReadyListener(ShareScreenActivity.this);
             //recordService.initRtcEngine();
             startFullBtn.setEnabled(true);
             startFullBtn.setText(recordService.isRunning() ? R.string.stop_full_record : R.string.start_full_record);

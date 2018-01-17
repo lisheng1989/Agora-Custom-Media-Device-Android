@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.openlive.ui;
+package io.agora.rtc.ss.app.fileSource.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import io.agora.rtc.Constants;
 import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.fileSource.openlive.model.ConstantApp;
+import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
 
 
 public class MainActivity extends BaseActivity {
