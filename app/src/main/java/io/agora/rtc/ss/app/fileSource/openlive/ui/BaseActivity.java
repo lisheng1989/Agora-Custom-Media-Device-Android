@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import org.slf4j.Logger;
@@ -87,31 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public final void closeIME(View v) {
-        InputMethodManager mgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        mgr.hideSoftInputFromWindow(v.getWindowToken(), 0); // 0 force close IME
-        v.clearFocus();
-    }
-
-    public final void closeIMEWithoutFocus(View v) {
-        InputMethodManager mgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        mgr.hideSoftInputFromWindow(v.getWindowToken(), 0); // 0 force close IME
-    }
-
-    public void openIME(final EditText v) {
-        final boolean focus = v.requestFocus();
-        if (v.hasFocus()) {
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    InputMethodManager mgr = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    boolean result = mgr.showSoftInput(v, InputMethodManager.SHOW_FORCED);
-                    log.debug("openIME " + focus + " " + result);
-                }
-            });
-        }
-    }
 
     public boolean checkSelfPermission(String permission, int requestCode) {
         log.debug("checkSelfPermission " + permission + " " + requestCode);
@@ -191,10 +163,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-/*    protected void initVersionInfo() {
-        String version = "V " + BuildConfig.VERSION_NAME + "(Build: " + BuildConfig.VERSION_CODE
-                + ", " + ConstantApp.APP_BUILD_DATE + ", SDK: " + Constant.MEDIA_SDK_VERSION + ")";
-//        TextView textVersion = (TextView) findViewById(R.id.app_version);
-//        textVersion.setText(version);
-    }*/
 }

@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="local preview enable"
+        android:text="enable local preview "
         />
 
         <CheckBox
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="enable_view_record"
+            android:text="use view source"
             />
 
     </LinearLayout>

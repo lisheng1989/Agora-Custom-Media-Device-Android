@@ -41,6 +41,7 @@ public class NewInterfaceActivity extends Activity implements SurfaceReadyListen
     private ImageView recordView;
     private EditText channelName;
     private CheckBox enableLocal;
+    private Boolean isEnableLocal = false;
     private View localView;
     private int pictureCount = 0;
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
@@ -70,8 +71,10 @@ public class NewInterfaceActivity extends Activity implements SurfaceReadyListen
                                          boolean isChecked) {
                 if (isChecked) {
                     showLocalView();
+                    isEnableLocal = true;
                 } else {
                     removeLocalView();
+                    isEnableLocal =false;
                 }
             }
         });
@@ -166,6 +169,11 @@ public class NewInterfaceActivity extends Activity implements SurfaceReadyListen
     @Override
     public void surfaceIsReady(View previewSurface) {
         localView = previewSurface;
+        if(isEnableLocal){
+            showLocalView();
+        }else{
+            removeLocalView();
+        }
     }
 
     public void showLocalView() {
