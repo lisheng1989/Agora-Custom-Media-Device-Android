@@ -1,15 +1,19 @@
-# Agora Screen Sharing Android
+# Agora-Custom-Media-Device-Android
 
 
 *Read this in other languages: [English](README.en.md)*
 
-这个开源示例项目演示了如何用 Agora 视频 SDK 实现屏幕共享。
+这个开源示例项目演示了如何使用Agora SDK中提供的新的MediaIO接口
 
-在这个示例项目中包含了以下功能：
+在这个示例项目中，使用新的MediaIO接口实现了以下功能：
 
-- 开始或结束屏幕共享
+1、实现共享手机屏幕或者共享特定View到远端
+
+2、实现本地视频和Camera作为数据源，本地播放并能送到远端显示，数据源可以切换。
 
 你可以在这里查看Agora视频SDK的入门示例项目：[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
+
+你也可以查看 Android 平台的使用旧接口实现屏幕共享的示例项目：[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
 
 你也可以查看 iOS 平台的示例项目：[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
 
