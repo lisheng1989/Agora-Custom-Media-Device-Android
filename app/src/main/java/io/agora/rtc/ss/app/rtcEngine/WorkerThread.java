@@ -69,7 +69,7 @@ public class WorkerThread extends Thread {
                     break;
                 case ACTION_WORKER_CONFIG_ENGINE:
                     Object[] configData = (Object[]) msg.obj;
-                    mWorkerThread.configEngine((int) configData[0], (int) configData[1],(boolean) configData[2]);
+                    mWorkerThread.configEngine((int) configData[0], (int) configData[1], (boolean) configData[2]);
                     break;
                 case ACTION_WORKER_PREVIEW:
                     Object[] previewData = (Object[]) msg.obj;
@@ -199,12 +199,12 @@ public class WorkerThread extends Thread {
 
     private final MyEngineEventHandler mEngineEventHandler;
 
-    public final void configEngine(int cRole, int vProfile,boolean isSwap) {
+    public final void configEngine(int cRole, int vProfile, boolean isSwap) {
         if (Thread.currentThread() != this) {
             log.warn("configEngine() - worker thread asynchronously " + cRole + " " + vProfile);
             Message envelop = new Message();
             envelop.what = ACTION_WORKER_CONFIG_ENGINE;
-            envelop.obj = new Object[]{cRole, vProfile,isSwap};
+            envelop.obj = new Object[]{cRole, vProfile, isSwap};
             mWorkerHandler.sendMessage(envelop);
             return;
         }
@@ -216,7 +216,6 @@ public class WorkerThread extends Thread {
         mRtcEngine.setVideoProfile(mEngineConfig.mVideoProfile, isSwap);
 
         mRtcEngine.setClientRole(cRole);
-        Log.i("tjy","configEngine " + cRole + " " + mEngineConfig.mVideoProfile+"isSwap:"+isSwap);
         log.debug("configEngine " + cRole + " " + mEngineConfig.mVideoProfile);
     }
 

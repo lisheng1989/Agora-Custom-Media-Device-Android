@@ -1,14 +1,14 @@
-package io.agora.rtc.ss.app.newInterface.source;
+package io.agora.rtc.ss.app.sharescreen.source;
 
 /**
  * Created by yong on 2017/12/29.
  */
 
 public class ViewCaptureSetting {
-    private  int fps ;
-    private int width ;
-    private int height ;
-    private int format ;
+    private int fps;
+    private int width;
+    private int height;
+    private int format;
 
     public int getFps() {
         return fps;

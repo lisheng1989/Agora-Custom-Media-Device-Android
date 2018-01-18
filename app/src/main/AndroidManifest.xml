@@ -29,22 +29,22 @@
         <activity
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".newInterface.ui.ShareScreenActivity"
+            android:name=".sharescreen.ui.ShareScreenActivity"
             android:hardwareAccelerated="true"/>
 
 
         <activity
-            android:name=".fileSource.ui.PrivateTextureViewActivity"
+            android:name=".videoSource.ui.PrivateTextureViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:hardwareAccelerated="true">
         </activity>
 
-        <activity android:name=".fileSource.ui.MainActivity"
+        <activity android:name=".videoSource.ui.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:hardwareAccelerated="true">
         </activity>
 
-        <service android:name=".newInterface.ui.RecordService"/>
+        <service android:name=".sharescreen.ui.RecordService"/>
     </application>
 
 </manifest>

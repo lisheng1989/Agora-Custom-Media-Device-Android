@@ -7,36 +7,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <EditText
             android:id="@+id/channel_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_channel_info"
-            android:padding="20sp"/>
+            android:padding="20sp"
+            android:text="@string/label_channel_info" />
 
-    <Button
-        android:id="@+id/start_full_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_full_record" />
+        <Button
+            android:id="@+id/start_full_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_full_record" />
 
 
-
-    <CheckBox
-        android:id="@+id/local_preview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="enable local preview "
-        />
+        <CheckBox
+            android:id="@+id/local_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="enable local preview " />
 
         <CheckBox
             android:id="@+id/enable_view_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="use view source"
-            />
+            android:text="use view source" />
 
     </LinearLayout>
 
@@ -47,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

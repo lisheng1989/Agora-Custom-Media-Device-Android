@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -81,8 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         deInitUIandEvent();
         super.onDestroy();
     }
-    public Boolean checkPermission(String permission, int requestCode){
-        Log.i("TJY","check " + permission + " " + requestCode);
+
+    public Boolean checkPermission(String permission, int requestCode) {
+
         if (ContextCompat.checkSelfPermission(this,
                 permission)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -111,12 +111,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                     requestCode);
             return false;
         }
-        Log.i("TJY","try to checkSelfPermission ："+permission);
         if (Manifest.permission.CAMERA.equals(permission)) {
-            Log.i("TJY","init workThread");
             ((AGApplication) getApplication()).initWorkerThread();
         }
-        Log.i("TJY","check " + permission + " " + requestCode);
         return true;
     }
 

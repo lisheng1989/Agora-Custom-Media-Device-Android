@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.ui;
+package io.agora.rtc.ss.app.videoSource.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +23,8 @@ import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
 import io.agora.rtc.ss.app.BaseActivity;
 import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.fileSource.source.AgoraLocalVideoSource;
-import io.agora.rtc.ss.app.fileSource.source.PrivateTextureHelper;
+import io.agora.rtc.ss.app.videoSource.source.AgoraLocalVideoSource;
+import io.agora.rtc.ss.app.videoSource.source.PrivateTextureHelper;
 import io.agora.rtc.ss.app.rtcEngine.AGEventHandler;
 import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
 
@@ -34,7 +34,7 @@ import static io.agora.rtc.mediaio.MediaIO.PixelFormat.I420;
 import static io.agora.rtc.mediaio.MediaIO.PixelFormat.TEXTURE_OES;
 
 public class PrivateTextureViewActivity extends BaseActivity implements AGEventHandler {
-    public final static String TAG = "keke:";
+    public final static String TAG = "PrivateTextureView";
     private Map<Integer, Boolean> mUsers;
     private String mChannelName;
     private String videoPath;
@@ -58,18 +58,14 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_private_texture_view);
         mUsers = new HashMap<>();
-
-        //attention: to make TextureView call back available,
-        // we should put setSurfaceTextureListener() in onCreate()
-        //because: onCreate() -> drawUI -> surface available call back,
-        // so we should set listener before ui draw, or we should redraw the ui
-        mRemoteTextureView = (TextureView)findViewById(R.id.textureView2);;
+        mRemoteTextureView = (TextureView) findViewById(R.id.textureView2);
+        ;
         mRemoteRender = new PrivateTextureHelper(this, mRemoteTextureView);
 
         SeekBarCallBack seekBarCallBack = new SeekBarCallBack();
-        mAlphaSeekBar = (SeekBar)findViewById(R.id.seekBar);
+        mAlphaSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mAlphaSeekBar.setOnSeekBarChangeListener(seekBarCallBack);
-        mRotationSeekBar = (SeekBar)findViewById(R.id.seekBar2);
+        mRotationSeekBar = (SeekBar) findViewById(R.id.seekBar2);
         mRotationSeekBar.setOnSeekBarChangeListener(seekBarCallBack);
         mZoomSeekBar = (SeekBar) findViewById(R.id.seekBar3);
         mZoomSeekBar.setOnSeekBarChangeListener(seekBarCallBack);
@@ -78,13 +74,11 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("TJY", "onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("TJY", "onStop");
         worker().leaveChannel(mChannelName);
         worker().preview(false, null, 0);
     }
@@ -94,36 +88,36 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         super.onDestroy();
     }
 
-    //frome BaseActivity begin
+
     protected void initUIandEvent() {
-        Log.e(TAG, "initUIandEvent");
+        Log.i(TAG, "initUIandEvent");
         event().addEventHandler(this);
         Intent i = getIntent();
         mChannelName = i.getStringExtra(ConstantApp.ACTION_KEY_ROOM_NAME);
         videoPath = i.getStringExtra(ConstantApp.ACTION_KEY_VIDEO_PATH);
         mClientRole = i.getIntExtra(ConstantApp.ACTION_KEY_CROLE, Constants.CLIENT_ROLE_BROADCASTER);
-            mVideoSource = new AgoraLocalVideoSource(this,640, 480,videoPath);
-            FrameLayout container = (FrameLayout) findViewById(R.id.texture_view_container);
-            if (container.getChildCount() >= 1) {
-                return;
-            }
-            mLocalTextureView = new TextureView(this);
-            container.addView(mLocalTextureView);
-            mRender = new PrivateTextureHelper(this, mLocalTextureView);
-            ((PrivateTextureHelper)mRender).init(((AgoraLocalVideoSource)mVideoSource).getEglContext());
-            ((PrivateTextureHelper)mRender).setBufferType(TEXTURE);
-            ((PrivateTextureHelper)mRender).setPixelFormat(TEXTURE_OES);
-            worker().setVideoSource(mVideoSource);
+        mVideoSource = new AgoraLocalVideoSource(this, 640, 480, videoPath);
+        FrameLayout container = (FrameLayout) findViewById(R.id.texture_view_container);
+        if (container.getChildCount() >= 1) {
+            return;
+        }
+        mLocalTextureView = new TextureView(this);
+        container.addView(mLocalTextureView);
+        mRender = new PrivateTextureHelper(this, mLocalTextureView);
+        ((PrivateTextureHelper) mRender).init(((AgoraLocalVideoSource) mVideoSource).getEglContext());
+        ((PrivateTextureHelper) mRender).setBufferType(TEXTURE);
+        ((PrivateTextureHelper) mRender).setPixelFormat(TEXTURE_OES);
+        worker().setVideoSource(mVideoSource);
 
-            worker().setLocalRender(mRender);
-            worker().preview(true, null, 0);
+        worker().setLocalRender(mRender);
+        worker().preview(true, null, 0);
         doConfigEngine(mClientRole);
 
         worker().joinChannel(mChannelName, 0);
     }
 
     protected void deInitUIandEvent() {
-        Log.e(TAG, "deInitUIandEvent()");
+        Log.i(TAG, "deInitUIandEvent()");
         worker().leaveChannel(mChannelName);
         if (mClientRole == Constants.CLIENT_ROLE_BROADCASTER) {
             worker().preview(false, null, 0);
@@ -131,17 +125,18 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         event().removeEventHandler(this);
         mUsers.clear();
     }
-    //frome BaseActivity end
 
-    //from AGEventHandler begin
+
     public void onFirstRemoteVideoDecoded(final int uid, final int width, final int height, final int elapsed) {
         Log.d(TAG, "onFirstRemoteVideoDecoded");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                addNewUser(uid, width, height);
-            }
-        });
+        if(uid!=config().mUid){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    addNewUser(uid, width, height);
+                }
+            });
+        }
     }
 
     public void onJoinChannelSuccess(String channel, int uid, int elapsed) {
@@ -162,7 +157,7 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         }
         int vProfile = ConstantApp.VIDEO_PROFILES[prefIndex];
 
-        worker().configEngine(cRole, vProfile,false);
+        worker().configEngine(cRole, vProfile, false);
     }
 
     private void addNewUser(int uid, int width, int height) {
@@ -171,16 +166,16 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
 
         mUsers.put(uid, true);
 
-        ((PrivateTextureHelper)mRemoteRender).init(null);
-        ((PrivateTextureHelper)mRemoteRender).setBufferType(BYTE_ARRAY);
-        ((PrivateTextureHelper)mRemoteRender).setPixelFormat(I420);
+        ((PrivateTextureHelper) mRemoteRender).init(null);
+        ((PrivateTextureHelper) mRemoteRender).setBufferType(BYTE_ARRAY);
+        ((PrivateTextureHelper) mRemoteRender).setPixelFormat(I420);
         worker().addRemoteRender(uid, mRemoteRender);
     }
 
-    //to test textureView
+
     public class SeekBarCallBack implements SeekBar.OnSeekBarChangeListener {
-        public void onProgressChanged (SeekBar seekBar, int progress, boolean fromUser) {
-            if(seekBar == mAlphaSeekBar) {
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (seekBar == mAlphaSeekBar) {
                 float alpha = progress / 100.0f;
                 mLocalTextureView.setAlpha(1 - alpha);
             }
@@ -199,17 +194,14 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         }
 
         public void onStartTrackingTouch(SeekBar seekBar) {
-            //
         }
 
         public void onStopTrackingTouch(SeekBar seekBar) {
-            //
         }
     }
 
-    //here to check switch between "camera source" <-----> "local video source"
+
     public void switchSource(View view) {
-        //
         worker().preview(false, null, 0);
 
         FrameLayout container = (FrameLayout) findViewById(R.id.texture_view_container);
@@ -221,20 +213,20 @@ public class PrivateTextureViewActivity extends BaseActivity implements AGEventH
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         EglBase.Context sharedContext;
         if (mLocalSourceFlag) {
-            Log.e(TAG, "switch to camera source");
-            mVideoSource = new AgoraTextureCamera(this,640, 480);
-            sharedContext = ((AgoraTextureCamera)mVideoSource).getEglContext();
-            container.getLayoutParams().width = wm.getDefaultDisplay().getWidth()*2/5;
+            Log.i(TAG, "switch to camera source");
+            mVideoSource = new AgoraTextureCamera(this, 640, 480);
+            sharedContext = ((AgoraTextureCamera) mVideoSource).getEglContext();
+            container.getLayoutParams().width = wm.getDefaultDisplay().getWidth() * 2 / 5;
         } else {
-            Log.e(TAG, "switch to local video source");
-            mVideoSource = new AgoraLocalVideoSource(this, 640, 480,videoPath);
-            sharedContext = ((AgoraLocalVideoSource)mVideoSource).getEglContext();
+            Log.i(TAG, "switch to local video source");
+            mVideoSource = new AgoraLocalVideoSource(this, 640, 480, videoPath);
+            sharedContext = ((AgoraLocalVideoSource) mVideoSource).getEglContext();
             container.getLayoutParams().width = wm.getDefaultDisplay().getWidth();
         }
         mRender = new PrivateTextureHelper(this, mLocalTextureView);
-        ((PrivateTextureHelper)mRender).init(sharedContext);
-        ((PrivateTextureHelper)mRender).setBufferType(TEXTURE);
-        ((PrivateTextureHelper)mRender).setPixelFormat(TEXTURE_OES);
+        ((PrivateTextureHelper) mRender).init(sharedContext);
+        ((PrivateTextureHelper) mRender).setBufferType(TEXTURE);
+        ((PrivateTextureHelper) mRender).setPixelFormat(TEXTURE_OES);
         worker().setVideoSource(mVideoSource);
         worker().setLocalRender(mRender);
         worker().preview(true, null, 0);

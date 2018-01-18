@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.newInterface.ui;
+package io.agora.rtc.ss.app.sharescreen.ui;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -31,7 +31,7 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
     private static final int STORAGE_REQUEST_CODE = 102;
     private static final int AUDIO_REQUEST_CODE = 103;
     private static int[] PICTURE_ARRAY = null;
-    private static final String TAG = "NewInterfaceActivity" ;
+    private static final String TAG = "NewInterfaceActivity";
     private MediaProjectionManager projectionManager;
     private MediaProjection mediaProjection;
     private RecordService recordService;
@@ -78,7 +78,7 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
                     isEnableLocal = true;
                 } else {
                     removeLocalView();
-                    isEnableLocal =false;
+                    isEnableLocal = false;
                 }
             }
         });
@@ -104,7 +104,6 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                Log.i("TJY","setOnCheckedChangeListener"+isChecked);
                 if (isChecked) {
                     viewLayout.setVisibility(View.VISIBLE);
                     recordService.setRecordView(recordView);
@@ -186,15 +185,15 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
     @Override
     public void surfaceIsReady(View previewSurface) {
         localView = previewSurface;
-        if(isEnableLocal){
+        if (isEnableLocal) {
             showLocalView();
-        }else{
+        } else {
             removeLocalView();
         }
     }
 
     public void showLocalView() {
-        if (localView != null&&enableLocal.isChecked()) {
+        if (localView != null && enableLocal.isChecked()) {
             removeLocalView();
             FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
             container.addView(localView);

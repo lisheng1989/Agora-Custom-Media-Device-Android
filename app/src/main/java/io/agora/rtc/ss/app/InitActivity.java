@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import io.agora.rtc.ss.app.fileSource.ui.MainActivity;
-import io.agora.rtc.ss.app.newInterface.ui.ShareScreenActivity;
+import io.agora.rtc.ss.app.videoSource.ui.MainActivity;
+import io.agora.rtc.ss.app.sharescreen.ui.ShareScreenActivity;
 
 public class InitActivity extends Activity {
 
     private static final String LOG_TAG = "InitActivity";
-
 
 
     @Override
@@ -22,20 +21,17 @@ public class InitActivity extends Activity {
     }
 
 
-
-    public void onOldInterfaceClicked(View view){
+    public void onOldInterfaceClicked(View view) {
         Intent intent1 = new Intent(InitActivity.this,
                 MainActivity.class);
         startActivity(intent1);
-        //this.finish();
     }
 
 
-    public void onNewInterfaceClicked(View view){
+    public void onNewInterfaceClicked(View view) {
         Intent intent1 = new Intent(InitActivity.this,
                 ShareScreenActivity.class);
         startActivity(intent1);
-        //this.finish();
     }
 
 

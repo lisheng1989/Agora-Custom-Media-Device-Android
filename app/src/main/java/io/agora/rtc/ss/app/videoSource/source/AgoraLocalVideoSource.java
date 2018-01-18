@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.source;
+package io.agora.rtc.ss.app.videoSource.source;
 
 import android.content.Context;
 import android.media.MediaCodec;
@@ -25,7 +25,7 @@ public class AgoraLocalVideoSource extends TextureSource {
     private Context mContext;
     private VideoDecoder mVideoDecoder;
 
-    public AgoraLocalVideoSource(Context context, int width, int height,String videoPath) {
+    public AgoraLocalVideoSource(Context context, int width, int height, String videoPath) {
         super(null, width, height);
         this.videoPath = videoPath;
         mContext = context;
@@ -34,7 +34,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 
     @Override
     public void onTextureFrameAvailable(int oesTextureId, float[] transformMatrix, long timestampNs) {
-        Log.i(TAG, "onTextureFrameAvailable, oesTextureId = "+oesTextureId+" ts = "+timestampNs);
+        Log.i(TAG, "onTextureFrameAvailable, oesTextureId = " + oesTextureId + " ts = " + timestampNs);
 
         timestampNs = elapsedRealtime();
 
@@ -54,7 +54,7 @@ public class AgoraLocalVideoSource extends TextureSource {
         Log.i(TAG, "onCapturerOpened");
         try {
             mVideoDecoder = new VideoDecoder();
-            mVideoDecoder.setDataSource("file://"+this.videoPath);
+            mVideoDecoder.setDataSource("file://" + this.videoPath);
             mVideoDecoder.setVideoSurface(new Surface(getSurfaceTexture()));
         } catch (IOException ie) {
             ie.printStackTrace();
@@ -101,8 +101,6 @@ public class AgoraLocalVideoSource extends TextureSource {
 
         //MediaCodec related
         private MediaCodec mDecoder;
-
-        //RT related
         private Surface mSurface;
 
         private Thread playBackThread;
@@ -144,7 +142,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 
                 mVideoWidth = mMediaFormat.getInteger(MediaFormat.KEY_WIDTH);
                 mVideoHeight = mMediaFormat.getInteger(MediaFormat.KEY_HEIGHT);
-                Log.e(TAG, "mVideoWidth = "+mVideoWidth+" mVideoHeight = "+mVideoHeight);
+                Log.e(TAG, "mVideoWidth = " + mVideoWidth + " mVideoHeight = " + mVideoHeight);
 
                 mDecoder = MediaCodec.createDecoderByType(mimeType);
                 if (mDecoder == null) {
@@ -180,10 +178,6 @@ public class AgoraLocalVideoSource extends TextureSource {
             Log.i(TAG, "stop()");
             eos = true;
             release();
-/*            if (playBackThread != null && playBackThread.isAlive()) {
-                playBackThread.interrupt();
-                while (playBackThread.isAlive()) Log.e(TAG, "stop, playThread still Alive");
-            }*/
         }
 
         public void release() {
@@ -206,21 +200,12 @@ public class AgoraLocalVideoSource extends TextureSource {
 
         }
 
-        public MediaFormat getMediaFormat() {
-            return mMediaFormat;
-        }
-
         private class VideoDecodeThread implements Runnable {
             public void run() {
                 eos = false;
                 playVideo();
             }
         }
-
-        public Thread getPlayBackThread() {
-            return playBackThread;
-        }
-
 
         private void playVideo() {
 
@@ -278,18 +263,18 @@ public class AgoraLocalVideoSource extends TextureSource {
 
                         //here do video sync
                         if (syncObj.needUpdateSyncTime()) {
-                            syncObj.updateSyncTimeMs(outputBufferInfo.presentationTimeUs/1000);
+                            syncObj.updateSyncTimeMs(outputBufferInfo.presentationTimeUs / 1000);
                         }
                         nowPts = syncObj.getCurrentRelativeTimeMs();
-                        if (outputBufferInfo.presentationTimeUs/1000 > nowPts) {
+                        if (outputBufferInfo.presentationTimeUs / 1000 > nowPts) {
                             long waitTimeMs = outputBufferInfo.presentationTimeUs / 1000 - nowPts;
                             if (waitTimeMs > TS_TOO_EARLY_WARN) {
-                                Log.w(TAG, "time too early by "+ waitTimeMs);
+                                Log.w(TAG, "time too early by " + waitTimeMs);
                             }
                             Thread.sleep(waitTimeMs);
-                        } else if (nowPts - outputBufferInfo.presentationTimeUs/1000 > TS_TOO_LATE_DROP) {
+                        } else if (nowPts - outputBufferInfo.presentationTimeUs / 1000 > TS_TOO_LATE_DROP) {
                             Log.w(TAG, "video too late, drop this frame, ts = " +
-                                    outputBufferInfo.presentationTimeUs+" Us"+"nowPts = "+nowPts+" Ms");
+                                    outputBufferInfo.presentationTimeUs + " Us" + "nowPts = " + nowPts + " Ms");
                             continue;
                         }
                         //render the output buffer to output surface;

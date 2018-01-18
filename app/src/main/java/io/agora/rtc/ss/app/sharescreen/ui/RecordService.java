@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.newInterface.ui;
+package io.agora.rtc.ss.app.sharescreen.ui;
 
 import android.app.Service;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import io.agora.rtc.Constants;
 import io.agora.rtc.gl.EglBase;
 import io.agora.rtc.mediaio.AgoraSurfaceView;
 import io.agora.rtc.mediaio.MediaIO;
-import io.agora.rtc.ss.app.newInterface.source.AgoraTextureRecord;
-import io.agora.rtc.ss.app.newInterface.source.ViewSharingCapturer;
+import io.agora.rtc.ss.app.sharescreen.source.AgoraTextureRecord;
+import io.agora.rtc.ss.app.sharescreen.source.ViewSharingCapturer;
 import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
 import io.agora.rtc.ss.app.rtcEngine.WorkerThread;
 import io.agora.rtc.video.VideoCanvas;
@@ -82,7 +82,6 @@ public class RecordService extends Service {
     public void setRecordView(View view) {
 
         this.recordView = view;
-        Log.i("TJY","setRecordView:"+view);
     }
 
     public boolean startRecord() {
@@ -145,7 +144,6 @@ public class RecordService extends Service {
         this.workerThread.getRtcEngine().stopPreview();
         releasTextureSource();
         releaseRGBASource();
-        Log.i("TJY","initSurfaceRGBA");
         viewSource = new ViewSharingCapturer(this.recordView);
 
         AgoraSurfaceView render = new AgoraSurfaceView(this);
@@ -160,7 +158,7 @@ public class RecordService extends Service {
         listener.surfaceIsReady(previewSurfaceView);
         this.workerThread.getRtcEngine().setVideoSource(viewSource);
         this.workerThread.getRtcEngine().startPreview();
-        Log.i("TJY","initSurfaceRGBA over");
+
     }
 
     public void releasTextureSource() {
@@ -194,7 +192,6 @@ public class RecordService extends Service {
 
     public void setWorkerThread(WorkerThread workerThread) {
         this.workerThread = workerThread;
-        Log.i("TJY","workthread:"+workerThread);
     }
 
     public class RecordBinder extends Binder {
@@ -210,7 +207,6 @@ public class RecordService extends Service {
 
     public void setEnableViewRecord(boolean enableViewRecord) {
         isEnableViewRecord = enableViewRecord;
-        Log.i("TJY","running:"+running +" isEnableViewRecord"+isEnableViewRecord);
         if (running) {
             if (isEnableViewRecord) {
                 initSurfaceRGBA();
@@ -229,7 +225,7 @@ public class RecordService extends Service {
             prefIndex = ConstantApp.DEFAULT_PROFILE_IDX;
         }
         int vProfile = Constants.VIDEO_PROFILE_360P;
-        this.workerThread.configEngine(cRole, vProfile,true);
+        this.workerThread.configEngine(cRole, vProfile, true);
 
     }
 }

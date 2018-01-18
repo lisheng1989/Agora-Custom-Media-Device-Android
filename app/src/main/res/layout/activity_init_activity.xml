@@ -7,7 +7,7 @@
     tools:context=".InitActivity">
 
 
-        <Button
+    <Button
         android:id="@+id/start_old_interface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/start_new_interface"
         android:layout_width="wrap_content"
@@ -26,6 +27,6 @@
         android:text="@string/label_use_new_interface"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/start_old_interface"/>
+        app:layout_constraintTop_toTopOf="@+id/start_old_interface" />
 
 </android.support.constraint.ConstraintLayout>

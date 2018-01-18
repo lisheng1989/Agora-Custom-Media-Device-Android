@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.source;
+package io.agora.rtc.ss.app.videoSource.source;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
@@ -109,9 +109,7 @@ public class PrivateTextureHelper implements IVideoSink, TextureView.SurfaceText
         }
         return type;
     }
-    //from IVideoRenderer end
 
-    //from IVideoFrameConsumer
     @Override
     public void consumeTextureFrame(int texId, int format, int width, int height, int rotation, long ts, float[] matrix) {
         Log.e(TAG, "consumeTextureFrame");
@@ -129,23 +127,19 @@ public class PrivateTextureHelper implements IVideoSink, TextureView.SurfaceText
         Log.e(TAG, "consumeByteArrayFrame");
         mRender.consume(data, format, width, height, rotation, ts);
     }
-    //from IVideoFrameConsumer end
 
-    //from SurfaceTextureListener begin
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         Log.d(TAG, "onSurfaceTextureAvailable");
-        //todo
     }
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
         Log.d(TAG, "onSurfaceTextureSizeChanged");
-        //todo
     }
 
     @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface){
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         Log.d(TAG, "onSurfaceTextureDestroyed");
         return true;
     }
@@ -154,5 +148,5 @@ public class PrivateTextureHelper implements IVideoSink, TextureView.SurfaceText
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         //Log.d(TAG, "onSurfaceTextureUpdated");
     }
-    //from SurfaceTextureListener end
+
 }

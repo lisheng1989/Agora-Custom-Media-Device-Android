@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.fileSource.ui;
+package io.agora.rtc.ss.app.videoSource.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void deInitUIandEvent() {
     }
-
 
 
     public void onClickJoin(View view) {

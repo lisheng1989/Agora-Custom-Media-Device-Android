@@ -3,7 +3,7 @@
  *
  * All Rights Reserved.
  */
-package io.agora.rtc.ss.app.newInterface.source;
+package io.agora.rtc.ss.app.sharescreen.source;
 
 import android.content.Context;
 import android.hardware.Camera;
