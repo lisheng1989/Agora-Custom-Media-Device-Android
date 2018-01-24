@@ -46,10 +46,6 @@ public class PrivateTextureHelper implements IVideoSink, TextureView.SurfaceText
         mDrawer = drawer;
     }
 
-    public long eglContextHandle() {
-        return mRender.eglContextHandle();
-    }
-
     public void setBufferType(MediaIO.BufferType bufferType) {
         mRender.setBufferType(bufferType);
     }
@@ -90,6 +86,11 @@ public class PrivateTextureHelper implements IVideoSink, TextureView.SurfaceText
     public void onDispose() {
         Log.d(TAG, "onDispose");
         mRender.release();
+    }
+
+    @Override
+    public long getEGLContextHandle() {
+        return mRender.getEGLContextHandle();
     }
 
     @Override
