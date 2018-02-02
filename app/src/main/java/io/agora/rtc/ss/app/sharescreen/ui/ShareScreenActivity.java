@@ -140,8 +140,6 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
     @Override
     protected void onPause() {
         super.onPause();
-        worker().leaveChannel(channelNameString);
-        worker().preview(false, null, 0);
     }
 
     @Override
