@@ -56,7 +56,7 @@ public class ViewSharingCapturer implements IVideoSource {
         mFrameProducerHandler = new Handler();
         mViewCapturerSettings = new ViewCaptureSetting();
         mViewCapturerSettings.setFps(FPS);
-        mViewCapturerSettings.setFormat(AgoraVideoFrame.FORMAT_RGBA);
+        mViewCapturerSettings.setFormat(AgoraVideoFrame.BUFFER_TYPE_BUFFER);
     }
 
 
