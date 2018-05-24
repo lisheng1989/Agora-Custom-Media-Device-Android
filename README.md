@@ -5,11 +5,11 @@
 
 这个开源示例项目演示了如何使用Agora SDK中提供的新的MediaIO接口
 
-在这个示例项目中，使用新的MediaIO接口实现了以下功能：
+在这个示例项目中，使用MediaIO接口实现了以下两个功能：
 
-1、实现共享手机屏幕或者共享特定View到远端
+1、实现共享手机屏幕或者投射特定的View到远端。
 
-2、实现本地视频和Camera作为数据源，本地播放并能送到远端显示，数据源可以切换。
+2、实现本地视频和Camera作为外部数据源，本地显示并推送视频或Camera数据到远端；基于新的MediaIO接口，实现频道内视频源动态切换。
 
 你可以在这里查看Agora视频SDK的入门示例项目：[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
 
