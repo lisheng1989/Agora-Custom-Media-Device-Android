@@ -1,68 +1,62 @@
-# Agora-Custom-Media-Device-Android
-
+# Agora-Custom-Media-Device
 
 *Read this in other languages: [English](README.en.md)*
 
-Õâ¸ö¿ªÔ´Ê¾ÀıÏîÄ¿ÑİÊ¾ÁËÈçºÎÊ¹ÓÃAgora SDKÖĞÌá¹©µÄĞÂµÄMediaIO½Ó¿Ú
+## ç®€ä»‹
 
-ÔÚÕâ¸öÊ¾ÀıÏîÄ¿ÖĞ£¬Ê¹ÓÃMediaIO½Ó¿ÚÊµÏÖÁËÒÔÏÂÁ½¸ö¹¦ÄÜ£º
+æœ¬å¼€æºç¤ºä¾‹é¡¹ç›®åŸºäº Agora Native SDK ä¸­æ–°å¢çš„ MediaIO æ¥å£å¼€å‘ï¼Œæ¼”ç¤ºäº†å¦‚ä½•ä½¿ç”¨ Agora SDK å®ç°ä»¥ä¸‹åŠŸèƒ½ï¼š
 
-1¡¢ÊµÏÖ¹²ÏíÊÖ»úÆÁÄ»»òÕßÍ¶ÉäÌØ¶¨µÄViewµ½Ô¶¶Ë¡£
+* å…±äº«æ‰‹æœºå±å¹•æˆ–è€…æŠ•å°„ç‰¹å®šçš„ View åˆ°è¿œç«¯ï¼›
+* æœ¬åœ°è§†é¢‘å’Œ Camera ä½œä¸ºå¤–éƒ¨æ•°æ®æºï¼Œæœ¬åœ°æ˜¾ç¤ºå¹¶æ¨é€è§†é¢‘æˆ– Camera æ•°æ®åˆ°è¿œç«¯ï¼›åŸºäºæ–°çš„ MediaIO æ¥å£ï¼Œå®ç°é¢‘é“å†…è§†é¢‘æºåŠ¨æ€åˆ‡æ¢ã€‚
 
-2¡¢ÊµÏÖ±¾µØÊÓÆµºÍCamera×÷ÎªÍâ²¿Êı¾İÔ´£¬±¾µØÏÔÊ¾²¢ÍÆËÍÊÓÆµ»òCameraÊı¾İµ½Ô¶¶Ë£»»ùÓÚĞÂµÄMediaIO½Ó¿Ú£¬ÊµÏÖÆµµÀÄÚÊÓÆµÔ´¶¯Ì¬ÇĞ»»¡£
+åœ¨è¿è¡Œæœ¬ç¤ºä¾‹é¡¹ç›®å‰ï¼Œä½ å¯ä»¥ï¼š
 
-Äã¿ÉÒÔÔÚÕâÀï²é¿´AgoraÊÓÆµSDKµÄÈëÃÅÊ¾ÀıÏîÄ¿£º[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
+* æŸ¥çœ‹Agoraè§†é¢‘SDKçš„å…¥é—¨ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
+* æŸ¥çœ‹ Android å¹³å°çš„ä½¿ç”¨æ—§æ¥å£å®ç°å±å¹•å…±äº«çš„ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
+* æŸ¥çœ‹ iOS å¹³å°çš„ç¤ºä¾‹é¡¹ç›®ï¼š[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
 
-ÄãÒ²¿ÉÒÔ²é¿´ Android Æ½Ì¨µÄÊ¹ÓÃ¾É½Ó¿ÚÊµÏÖÆÁÄ»¹²ÏíµÄÊ¾ÀıÏîÄ¿£º[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
+## å‡†å¤‡å¼€å‘ç¯å¢ƒ
 
-ÄãÒ²¿ÉÒÔ²é¿´ iOS Æ½Ì¨µÄÊ¾ÀıÏîÄ¿£º[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
+* è¯·ä¿è¯ä½ çš„ Android Studio ç‰ˆæœ¬åœ¨ Android Studio 2.0 åŠä»¥ä¸Š
+* Android çœŸæœºè®¾å¤‡ï¼ˆNexus 5X æˆ–å…¶ä»–è®¾å¤‡ï¼‰
+* ç”±äºéƒ¨åˆ†æ¨¡æ‹Ÿæœºæœ‰åŠŸèƒ½ç¼ºå¤±æˆ–æ€§èƒ½é—®é¢˜ï¼ŒAgora æ¨èä½¿ç”¨çœŸæœº
 
-## ÔËĞĞÊ¾Àı³ÌĞò
-**Ê×ÏÈ**ÔÚ [Agora.io ×¢²á](https://dashboard.agora.io/cn/signup/) ×¢²áÕËºÅ£¬²¢´´½¨×Ô¼ºµÄ²âÊÔÏîÄ¿£¬»ñÈ¡µ½ AppID¡£½« AppID ÌîĞ´½ø "app/src/main/res/values/strings.xml"
+## è¿è¡Œç¤ºä¾‹ç¨‹åº
 
-```
-<string name="agora_app_id"><#YOUR APP ID#></string>
-```
+1. åœ¨ [Agora.io æ³¨å†Œ](https://dashboard.agora.io/cn/signup/) æ³¨å†Œè´¦å·ï¼Œå¹¶åˆ›å»ºè‡ªå·±çš„æµ‹è¯•é¡¹ç›®ï¼Œè·å–åˆ° App IDã€‚
+2. ä¸‹è½½æœ¬é¡µç¤ºä¾‹é¡¹ç›®ã€‚
+3. åœ¨ç¤ºä¾‹ç¨‹åºçš„ *app/src/main/res/values/strings.xml* è·¯å¾„ä¸‹ï¼Œå¡«å…¥è·å–åˆ°çš„ App IDï¼š
 
-**È»ºó**ÊÇ¼¯³É Agora SDK£¬¼¯³É·½Ê½ÓĞÒÔÏÂÁ½ÖÖ£º
+   ```
+   <string name="agora_app_id"><#YOUR APP ID#></string>
+   ```
+4. é€‰æ‹©å¦‚ä¸‹ä»»æ„ä¸€ç§æ–¹æ³•é›†æˆ Agora SDKï¼š
 
-- Ê×Ñ¡¼¯³É·½Ê½£º
+ * æ–¹æ³•ä¸€ï¼šï¼ˆæ¨èï¼‰åœ¨é¡¹ç›®å¯¹åº”çš„æ¨¡å—çš„ **app/build.gradle** æ–‡ä»¶çš„ä¾èµ–å±æ€§ä¸­åŠ å…¥é€šè¿‡ JCenter è‡ªåŠ¨é›†æˆ Agora SDK çš„åœ°å€ï¼š
 
-ÔÚÏîÄ¿¶ÔÓ¦µÄÄ£¿éµÄ "app/build.gradle" ÎÄ¼şµÄÒÀÀµÊôĞÔÖĞ¼ÓÈëÍ¨¹ı JCenter ×Ô¶¯¼¯³É Agora SDK µÄµØÖ·£º
+   ```
+   compile 'io.agora.rtc:full-sdk:2.2.0'
+   ```
+   > å¦‚æœè¦åœ¨è‡ªå·±çš„åº”ç”¨ä¸­é›†æˆ Agora è§†é¢‘ SDKï¼Œæ·»åŠ é“¾æ¥åœ°å€æ˜¯æœ€é‡è¦çš„ä¸€æ­¥
 
-```
-compile 'io.agora.rtc:full-sdk:2.2.0'
-```
+ * æ–¹æ³•äºŒï¼šé€šè¿‡ä¸‹è½½ SDK åŒ…é›†æˆ
+ 
+   1ï¼‰åœ¨ [Agora.io SDK](https://www.agora.io/cn/download/) ä¸‹è½½ **è§†é¢‘é€šè¯ + ç›´æ’­ SDK**ï¼Œè§£å‹åå°†å…¶ä¸­çš„ **libs** æ–‡ä»¶å¤¹ä¸‹çš„ ***.jar** å’Œ **arm64-v8a**/**x86**/**armeabi-v7a** æ–‡ä»¶åˆ†åˆ«å¤åˆ¶åˆ°æœ¬é¡¹ç›®çš„ *app/libs* å’Œ *app/src/main/jniLibs* è·¯å¾„ä¸‹
+   
+   2ï¼‰åœ¨æœ¬é¡¹ç›®çš„ "app/build.gradle" æ–‡ä»¶ä¾èµ–å±æ€§ä¸­æ·»åŠ å¦‚ä¸‹ä¾èµ–å…³ç³»ï¼š
+   ```
+   compile fileTree(dir: 'libs', include: ['*.jar'])
+   ```
+5. ç”¨ Android Studio æ‰“å¼€è¯¥é¡¹ç›®ï¼Œè¿ä¸Šè®¾å¤‡ï¼Œç¼–è¯‘å¹¶è¿è¡Œã€‚ä¹Ÿå¯ä»¥ä½¿ç”¨ `Gradle` ç›´æ¥ç¼–è¯‘è¿è¡Œã€‚
 
-(Èç¹ûÒªÔÚ×Ô¼ºµÄÓ¦ÓÃÖĞ¼¯³É Agora ÊÓÆµ SDK£¬Ìí¼ÓÁ´½ÓµØÖ·ÊÇ×îÖØÒªµÄÒ»²½¡££©
+## è”ç³»æˆ‘ä»¬
 
-- ´ÎÑ¡¼¯³É·½Ê½£º
+- å®Œæ•´çš„ API æ–‡æ¡£è§ [æ–‡æ¡£ä¸­å¿ƒ](https://docs.agora.io/cn/)
+- å¦‚æœåœ¨é›†æˆä¸­é‡åˆ°é—®é¢˜ï¼Œä½ å¯ä»¥åˆ° [å¼€å‘è€…ç¤¾åŒº](https://dev.agora.io/cn/) æé—®
+- å¦‚æœæœ‰å”®å‰å’¨è¯¢é—®é¢˜ï¼Œä½ å¯ä»¥æ‹¨æ‰“ 400 632 6626ï¼Œæˆ–åŠ å…¥å®˜æ–¹Qç¾¤ 12742516 æé—®
+- å¦‚æœéœ€è¦å”®åæŠ€æœ¯æ”¯æŒï¼Œä½ å¯ä»¥åœ¨ [Agora Dashboard](https://dashboard.agora.io) æäº¤å·¥å•
+- å¦‚æœå‘ç°äº†ç¤ºä¾‹ä»£ç çš„ Bugï¼Œæ¬¢è¿æäº¤ [issue](https://github.com/AgoraIO/Agora-Screen-Sharing-Android/issues)
 
-µÚÒ»²½: ÔÚ [Agora.io SDK](https://www.agora.io/cn/download/) ÏÂÔØ **ÊÓÆµÍ¨»° + Ö±²¥ SDK**£¬½âÑ¹ºó½«ÆäÖĞµÄ **libs** ÎÄ¼ş¼ĞÏÂµÄ ***.jar** ¸´ÖÆµ½±¾ÏîÄ¿µÄ **app/libs** ÏÂ£¬ÆäÖĞµÄ **libs** ÎÄ¼ş¼ĞÏÂµÄ **arm64-v8a**/**x86**/**armeabi-v7a** ¸´ÖÆµ½±¾ÏîÄ¿µÄ **app/src/main/jniLibs** ÏÂ¡£
-
-µÚ¶ş²½: ÔÚ±¾ÏîÄ¿µÄ "app/build.gradle" ÎÄ¼şÒÀÀµÊôĞÔÖĞÌí¼ÓÈçÏÂÒÀÀµ¹ØÏµ£º
-
-```
-compile fileTree(dir: 'libs', include: ['*.jar'])
-```
-
-**×îºó**ÓÃ Android Studio ´ò¿ª¸ÃÏîÄ¿£¬Á¬ÉÏÉè±¸£¬±àÒë²¢ÔËĞĞ¡£
-
-Ò²¿ÉÒÔÊ¹ÓÃ `Gradle` Ö±½Ó±àÒëÔËĞĞ¡£
-
-## ÔËĞĞ»·¾³
-- Android Studio 2.0 +
-- ÕæÊµ Android Éè±¸ (Nexus 5X »òÕßÆäËüÉè±¸)
-- ²¿·ÖÄ£ÄâÆ÷»á´æÔÚ¹¦ÄÜÈ±Ê§»òÕßĞÔÄÜÎÊÌâ£¬ËùÒÔÍÆ¼öÊ¹ÓÃÕæ»ú
-
-## ÁªÏµÎÒÃÇ
-
-- ÍêÕûµÄ API ÎÄµµ¼û [ÎÄµµÖĞĞÄ](https://docs.agora.io/cn/)
-- Èç¹ûÔÚ¼¯³ÉÖĞÓöµ½ÎÊÌâ, Äã¿ÉÒÔµ½ [¿ª·¢ÕßÉçÇø](https://dev.agora.io/cn/) ÌáÎÊ
-- Èç¹ûÓĞÊÛÇ°×ÉÑ¯ÎÊÌâ, ¿ÉÒÔ²¦´ò 400 632 6626£¬»ò¼ÓÈë¹Ù·½QÈº 12742516 ÌáÎÊ
-- Èç¹ûĞèÒªÊÛºó¼¼ÊõÖ§³Ö, Äã¿ÉÒÔÔÚ [Agora Dashboard](https://dashboard.agora.io) Ìá½»¹¤µ¥
-- Èç¹û·¢ÏÖÁËÊ¾Àı´úÂëµÄ bug, »¶Ó­Ìá½» [issue](https://github.com/AgoraIO/Agora-Screen-Sharing-Android/issues)
-
-## ´úÂëĞí¿É
+## ä»£ç è®¸å¯
 
 The MIT License (MIT).
