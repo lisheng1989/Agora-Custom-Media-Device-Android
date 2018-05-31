@@ -1,4 +1,4 @@
-# Agora-Custom-Media-Device-Android
+# Agora-Custom-Media-Device
 
 *其他语言版本： [简体中文](README.md)*
 
@@ -43,8 +43,9 @@ Before running this sample project, you may:
 
  * Method 2: Download the SDK and integrate:
  
-   1) Download the **Agora Video SDK** from [Agora.io SDK](https://www.agora.io/en/blog/download/). Unzip the downloaded SDK package and copy ***.jar** ABD **arm64-v8a**/**x86**/**armeabi-v7a** under **libs** to *app/libs* and *app/src/main/jniLibs* respectively.
-   2)add the fllowing code in the property of the dependence of the "app/build.gradle":
+   i) Download the **Agora Video SDK** from [Agora.io SDK](https://www.agora.io/en/blog/download/). Unzip the downloaded SDK package and copy ***.jar** ABD **arm64-v8a**/**x86**/**armeabi-v7a** under **libs** to *app/libs* and *app/src/main/jniLibs* respectively.
+   
+   ii) Add the fllowing code in the property of the dependence of the "app/build.gradle":
 
    ```
    compile fileTree(dir: 'libs', include: ['*.jar'])
