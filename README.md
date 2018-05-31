@@ -11,7 +11,7 @@
 
 在运行本示例项目前，你可以：
 
-* 查看Agora视频SDK的入门示例项目：[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
+* 查看 Agora 视频 SDK 的入门示例项目：[Agora-Android-Tutorial-1to1](https://github.com/AgoraIO/Agora-Android-Tutorial-1to1)
 * 查看 Android 平台的使用旧接口实现屏幕共享的示例项目：[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
 * 查看 iOS 平台的示例项目：[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
 
