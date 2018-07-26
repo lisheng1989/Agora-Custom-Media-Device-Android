@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.sharescreen.source;
+package io.agora.rtc.mediaio.app.shareScreen.source;
 
 /**
  * Created by yong on 2017/12/29.

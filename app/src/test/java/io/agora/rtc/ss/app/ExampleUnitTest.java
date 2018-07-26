@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app;
+package io.agora.rtc.mediaio.app;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.videoSource.ui;
+package io.agora.rtc.mediaio.app.videoSource.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import io.agora.rtc.Constants;
-import io.agora.rtc.ss.app.BaseActivity;
-import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
+import io.agora.rtc.mediaio.app.BaseActivity;
+import io.agora.rtc.mediaio.app.R;
+import io.agora.rtc.mediaio.app.rtcEngine.ConstantApp;
 
 
 public class MainActivity extends BaseActivity {

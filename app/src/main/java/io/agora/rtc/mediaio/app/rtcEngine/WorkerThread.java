@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.rtcEngine;
+package io.agora.rtc.mediaio.app.rtcEngine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,7 +18,7 @@ import io.agora.rtc.Constants;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
-import io.agora.rtc.ss.app.R;
+import io.agora.rtc.mediaio.app.R;
 import io.agora.rtc.video.VideoCanvas;
 
 public class WorkerThread extends Thread {
@@ -111,48 +111,9 @@ public class WorkerThread extends Thread {
 
     private RtcEngine mRtcEngine;
 
-    public final void enablePreProcessor() {
-//        if (mEngineConfig.mClientRole == Constants.CLIENT_ROLE_BROADCASTER) {
-//            if (Constant.PRP_ENABLED) {
-//                if (mVideoEnhancer == null) {
-//                    mVideoEnhancer = new AgoraYuvEnhancer(mContext);
-//                    mVideoEnhancer.SetLighteningFactor(Constant.PRP_DEFAULT_LIGHTNESS);
-//                    mVideoEnhancer.SetSmoothnessFactor(Constant.PRP_DEFAULT_SMOOTHNESS);
-//                    mVideoEnhancer.StartPreProcess();
-//                }
-//            }
-//        }
-    }
-
-    public final void setPreParameters(float lightness, float smoothness) {
-        if (mEngineConfig.mClientRole == Constants.CLIENT_ROLE_BROADCASTER) {
-//            if (Constant.PRP_ENABLED) {
-//                if (mVideoEnhancer == null) {
-//                    mVideoEnhancer = new AgoraYuvEnhancer(mContext);
-//                }
-//                mVideoEnhancer.StartPreProcess();
-//            }
-        }
-
-        Constant.PRP_DEFAULT_LIGHTNESS = lightness;
-        Constant.PRP_DEFAULT_SMOOTHNESS = smoothness;
-
-//        if (mVideoEnhancer != null) {
-//            mVideoEnhancer.SetLighteningFactor(Constant.PRP_DEFAULT_LIGHTNESS);
-//            mVideoEnhancer.SetSmoothnessFactor(Constant.PRP_DEFAULT_SMOOTHNESS);
-//        }
-    }
-
-    public final void disablePreProcessor() {
-//        if (mVideoEnhancer != null) {
-//            mVideoEnhancer.StopPreProcess();
-//            mVideoEnhancer = null;
-//        }
-    }
-
     public final void joinChannel(final String channel, int uid) {
         if (Thread.currentThread() != this) {
-            log.warn("joinChannel() - worker thread asynchronously " + channel + " " + uid);
+            log.warn("joinChannel() - worker thread asynchronously " + channel + " " + (uid & 0xFFFFFFFFL));
             Message envelop = new Message();
             envelop.what = ACTION_WORKER_JOIN_CHANNEL;
             envelop.obj = new String[]{channel};
@@ -166,8 +127,7 @@ public class WorkerThread extends Thread {
 
         mEngineConfig.mChannel = channel;
 
-        enablePreProcessor();
-        log.debug("joinChannel " + channel + " " + uid);
+        log.debug("joinChannel " + channel + " " + (uid & 0xFFFFFFFFL));
     }
 
     public final void leaveChannel(String channel) {
@@ -183,8 +143,6 @@ public class WorkerThread extends Thread {
         if (mRtcEngine != null) {
             mRtcEngine.leaveChannel();
         }
-
-        disablePreProcessor();
 
         int clientRole = mEngineConfig.mClientRole;
         mEngineConfig.reset();
@@ -258,7 +216,7 @@ public class WorkerThread extends Thread {
 
     private RtcEngine ensureRtcEngineReadyLock() {
         if (mRtcEngine == null) {
-            String appId = mContext.getString(R.string.private_app_id);
+            String appId = mContext.getString(R.string.agora_app_id);
             if (TextUtils.isEmpty(appId)) {
                 throw new RuntimeException("NEED TO use your App ID, get your own ID at https://dashboard.agora.io/");
             }

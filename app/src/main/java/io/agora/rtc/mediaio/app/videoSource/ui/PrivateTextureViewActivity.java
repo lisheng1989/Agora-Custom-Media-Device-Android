@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.videoSource.ui;
+package io.agora.rtc.mediaio.app.videoSource.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,12 +21,12 @@ import io.agora.rtc.gl.EglBase;
 import io.agora.rtc.mediaio.AgoraTextureCamera;
 import io.agora.rtc.mediaio.IVideoSink;
 import io.agora.rtc.mediaio.IVideoSource;
-import io.agora.rtc.ss.app.BaseActivity;
-import io.agora.rtc.ss.app.R;
-import io.agora.rtc.ss.app.videoSource.source.AgoraLocalVideoSource;
-import io.agora.rtc.ss.app.videoSource.source.PrivateTextureHelper;
-import io.agora.rtc.ss.app.rtcEngine.AGEventHandler;
-import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
+import io.agora.rtc.mediaio.app.BaseActivity;
+import io.agora.rtc.mediaio.app.R;
+import io.agora.rtc.mediaio.app.videoSource.source.AgoraLocalVideoSource;
+import io.agora.rtc.mediaio.app.videoSource.source.PrivateTextureHelper;
+import io.agora.rtc.mediaio.app.rtcEngine.AGEventHandler;
+import io.agora.rtc.mediaio.app.rtcEngine.ConstantApp;
 
 import static io.agora.rtc.mediaio.MediaIO.BufferType.BYTE_ARRAY;
 import static io.agora.rtc.mediaio.MediaIO.BufferType.TEXTURE;

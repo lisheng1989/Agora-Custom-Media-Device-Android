@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2017  www.agora.io
- *
- * All Rights Reserved.
- */
-package io.agora.rtc.ss.app.sharescreen.source;
+package io.agora.rtc.mediaio.app.shareScreen.source;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -16,7 +11,6 @@ import android.view.Surface;
 import io.agora.rtc.mediaio.TextureSource;
 
 import static io.agora.rtc.mediaio.MediaIO.PixelFormat.TEXTURE_OES;
-
 
 public class AgoraTextureRecord extends TextureSource {
     private static final String TAG = AgoraTextureRecord.class.getSimpleName();

@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.videoSource.source;
+package io.agora.rtc.mediaio.app.videoSource.source;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;

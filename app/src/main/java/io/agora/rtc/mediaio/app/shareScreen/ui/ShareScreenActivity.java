@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.sharescreen.ui;
+package io.agora.rtc.mediaio.app.shareScreen.ui;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -22,9 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import io.agora.rtc.ss.app.BaseActivity;
-import io.agora.rtc.ss.app.R;
-
+import io.agora.rtc.mediaio.app.BaseActivity;
+import io.agora.rtc.mediaio.app.R;
 
 public class ShareScreenActivity extends BaseActivity implements SurfaceReadyListener {
     private static final int RECORD_REQUEST_CODE = 101;
@@ -53,7 +52,6 @@ public class ShareScreenActivity extends BaseActivity implements SurfaceReadyLis
         projectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
 
         setContentView(R.layout.activity_new_interface);
-
     }
 
     @Override
