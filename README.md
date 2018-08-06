@@ -14,7 +14,7 @@ A tutorial demo for Agora Video SDK can be found here: [Agora-Android-Tutorial-1
 
 You can find share screen demo for Android with old APIs here: [Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
 
-You can find demo for iOS here: [Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Custom-Media-Device-iOS)
+You can find demo for iOS here: [Agora-Custom-Media-Device-iOS](https://github.com/AgoraIO/Agora-Custom-Media-Device-iOS)
 
 ### Create an Account and Obtain an App ID
 In order to build and run the sample application you must obtain an App ID: 

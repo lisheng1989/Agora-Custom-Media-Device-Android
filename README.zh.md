@@ -15,7 +15,7 @@
 
 你也可以查看 Android 平台的使用旧接口实现屏幕共享的示例项目：[Agora-Screen-Sharing-Android](https://github.com/AgoraIO/Agora-Screen-Sharing-Android)
 
-你也可以查看 iOS 平台的示例项目：[Agora-Screen-Sharing-iOS](https://github.com/AgoraIO/Agora-Screen-Sharing-iOS)
+你也可以查看 iOS 平台的示例项目：[Agora-Custom-Media-Device-iOS](https://github.com/AgoraIO/Agora-Custom-Media-Device-iOS)
 
 ## 运行示例程序
 首先在 [Agora.io 注册](https://dashboard.agora.io/cn/signup/) 注册账号，并创建自己的测试项目，获取到 AppID。将 AppID 填写进 "app/src/main/res/values/strings_config.xml"
