@@ -1,6 +1,6 @@
 # Agora-Custom-Media-Device-Android
 
-*Other languages: [简体中文](README.md)*
+*Other languages: [简体中文](README.zh.md)*
 
 This open source sample project shows how to use the new MeidaIO interface provided in Agora RTC SDK(>= 2.1).
 
