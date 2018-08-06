@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app;
+package io.agora.rtc.mediaio.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("io.agora.rtc.ss.app", appContext.getPackageName());
+        assertEquals("io.agora.rtc.mediaio.app", appContext.getPackageName());
     }
 }

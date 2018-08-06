@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.sharescreen.source;
+package io.agora.rtc.mediaio.app.shareScreen.source;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -59,7 +59,6 @@ public class ViewSharingCapturer implements IVideoSource {
         mViewCapturerSettings.setFormat(AgoraVideoFrame.BUFFER_TYPE_BUFFER);
     }
 
-
     public boolean onInitialize(IVideoFrameConsumer var1) {
         try {
             this.mIVideoFrameConsumer = var1;
@@ -94,7 +93,6 @@ public class ViewSharingCapturer implements IVideoSource {
         return mViewCapturerSettings.getFormat();
     }
 
-
     public static byte[] getRGBFromBMP(Bitmap bmp) {
 
         int w = bmp.getWidth();
@@ -107,7 +105,7 @@ public class ViewSharingCapturer implements IVideoSource {
         for (int x = 0; x < h; x++) {
             for (int y = 0; y < w; y++) {
                 int color = bmp.getPixel(y, x);
-                //rgba
+                // rgba
                 pixels[k * 4 + 0] = (byte) Color.red(color);
                 pixels[k * 4 + 1] = (byte) Color.green(color);
                 pixels[k * 4 + 2] = (byte) Color.blue(color);

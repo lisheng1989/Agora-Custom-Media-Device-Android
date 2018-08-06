@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.rtcEngine;
+package io.agora.rtc.mediaio.app.rtcEngine;
 
 import io.agora.rtc.Constants;
 

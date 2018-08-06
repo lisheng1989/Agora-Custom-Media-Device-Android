@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.sharescreen.ui;
+package io.agora.rtc.mediaio.app.shareScreen.ui;
 
 import android.app.Service;
 import android.content.Intent;
@@ -16,12 +16,11 @@ import io.agora.rtc.Constants;
 import io.agora.rtc.gl.EglBase;
 import io.agora.rtc.mediaio.AgoraSurfaceView;
 import io.agora.rtc.mediaio.MediaIO;
-import io.agora.rtc.ss.app.sharescreen.source.AgoraTextureRecord;
-import io.agora.rtc.ss.app.sharescreen.source.ViewSharingCapturer;
-import io.agora.rtc.ss.app.rtcEngine.ConstantApp;
-import io.agora.rtc.ss.app.rtcEngine.WorkerThread;
+import io.agora.rtc.mediaio.app.shareScreen.source.AgoraTextureRecord;
+import io.agora.rtc.mediaio.app.shareScreen.source.ViewSharingCapturer;
+import io.agora.rtc.mediaio.app.rtcEngine.ConstantApp;
+import io.agora.rtc.mediaio.app.rtcEngine.WorkerThread;
 import io.agora.rtc.video.VideoCanvas;
-
 
 public class RecordService extends Service {
 
@@ -186,8 +185,6 @@ public class RecordService extends Service {
     public void leaveChannel() {
         this.workerThread.getRtcEngine().stopPreview();
         this.workerThread.getRtcEngine().leaveChannel();
-        //RtcEngine.destroy();
-        //mRtcEngine = null;
     }
 
     public void setWorkerThread(WorkerThread workerThread) {

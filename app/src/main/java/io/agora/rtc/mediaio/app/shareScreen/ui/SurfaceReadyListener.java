@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.sharescreen.ui;
+package io.agora.rtc.mediaio.app.shareScreen.ui;
 
 import android.view.View;
 

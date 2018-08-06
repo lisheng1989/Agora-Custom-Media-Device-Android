@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.rtcEngine;
+package io.agora.rtc.mediaio.app.rtcEngine;
 
 import android.app.Application;
 
@@ -10,7 +10,6 @@ public class AGApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // Normal app init code...
     }
 
     public synchronized void initWorkerThread() {

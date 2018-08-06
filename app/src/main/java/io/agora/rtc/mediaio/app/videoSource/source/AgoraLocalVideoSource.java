@@ -1,4 +1,4 @@
-package io.agora.rtc.ss.app.videoSource.source;
+package io.agora.rtc.mediaio.app.videoSource.source;
 
 import android.content.Context;
 import android.media.MediaCodec;
@@ -85,11 +85,10 @@ public class AgoraLocalVideoSource extends TextureSource {
         mVideoDecoder.stop();
     }
 
-
-    //video decoder
+    // video decoder
     public class VideoDecoder {
 
-        //MediaExtractor related
+        // MediaExtractor related
         private boolean eos = false;
         private MediaExtractor mExtractor;
         private String mFilePath;
@@ -99,7 +98,7 @@ public class AgoraLocalVideoSource extends TextureSource {
         private int mVideoWidth;
         private int mVideoHeight;
 
-        //MediaCodec related
+        // MediaCodec related
         private MediaCodec mDecoder;
         private Surface mSurface;
 
@@ -124,7 +123,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 
                 mExtractor.setDataSource(mFilePath);
 
-                //select first video track we find
+                // select first video track we find
                 int nTracks = mExtractor.getTrackCount();
                 for (int i = 0; i < nTracks; i++) {
                     mMediaFormat = mExtractor.getTrackFormat(i);
@@ -210,8 +209,8 @@ public class AgoraLocalVideoSource extends TextureSource {
         private void playVideo() {
 
             final int NO_BUFFER_INDEX = -1;
-            final long TS_TOO_EARLY_WARN = 300;//if early than 300 ms, give a waring
-            final long TS_TOO_LATE_DROP = 200;//if later than 200ms, drop this frame
+            final long TS_TOO_EARLY_WARN = 300; // if early than 300ms, give a waring
+            final long TS_TOO_LATE_DROP = 200; // if later than 200ms, drop this frame
             boolean signaledEos = false;
             int outputBufferIndex = NO_BUFFER_INDEX;
             int inputBufferIndex = NO_BUFFER_INDEX;
@@ -261,7 +260,7 @@ public class AgoraLocalVideoSource extends TextureSource {
 //                        Log.d(TAG, "outputBufferIndex = " + outputBufferIndex + " pts = " +
 //                                outputBufferInfo.presentationTimeUs);
 
-                        //here do video sync
+                        // here do video sync
                         if (syncObj.needUpdateSyncTime()) {
                             syncObj.updateSyncTimeMs(outputBufferInfo.presentationTimeUs / 1000);
                         }
@@ -277,7 +276,7 @@ public class AgoraLocalVideoSource extends TextureSource {
                                     outputBufferInfo.presentationTimeUs + " Us" + "nowPts = " + nowPts + " Ms");
                             continue;
                         }
-                        //render the output buffer to output surface;
+                        // render the output buffer to output surface;
                         boolean render = outputBufferInfo.size > 0;
                         mDecoder.releaseOutputBuffer(outputBufferIndex, render);
                         outputBufferIndex = NO_BUFFER_INDEX;
@@ -297,7 +296,6 @@ public class AgoraLocalVideoSource extends TextureSource {
         }
 
     }
-
 
     public class SimpleSyncObj {
         private long timeLineStartMs;
@@ -319,7 +317,7 @@ public class AgoraLocalVideoSource extends TextureSource {
         public void updateSyncTimeMs(long timeMs) {
             timeStampStartMs = timeMs;
             timeLineStartMs = elapsedRealtime();
-//            Log.d(TAG, "timeStart = "+timeStampStartMs+" timeLineStartUs = "+timeLineStartMs);
+//            Log.d(TAG, "timeStart = " + timeStampStartMs + " timeLineStartUs = " + timeLineStartMs);
         }
 
         public long getCurrentRelativeTimeMs() {

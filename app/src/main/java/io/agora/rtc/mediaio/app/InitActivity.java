@@ -1,12 +1,12 @@
-package io.agora.rtc.ss.app;
+package io.agora.rtc.mediaio.app;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import io.agora.rtc.ss.app.videoSource.ui.MainActivity;
-import io.agora.rtc.ss.app.sharescreen.ui.ShareScreenActivity;
+import io.agora.rtc.mediaio.app.videoSource.ui.MainActivity;
+import io.agora.rtc.mediaio.app.shareScreen.ui.ShareScreenActivity;
 
 public class InitActivity extends Activity {
 
